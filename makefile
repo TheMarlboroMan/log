@@ -8,7 +8,7 @@ CC=g++
 all: objdir obj/log.o
 
 objdir:
-	mkdir obj;
+	mkdir -p obj;
 
 obj/log.o: src/log.h src/log.cpp
 	$(CC) $(CFLAGS) src/log.cpp -o obj/log.o
