@@ -17,21 +17,21 @@ lcut	log::int_to_lcut(int v)
 		case warning: 	return lcut::warning; break;
 		case info: return lcut::info; break;
 		case all: 	return lcut::all; break;
-	}	
+	}
 
 	//Compiler: just shut up.
 	return lcut::all;
 }
 
 log::log()
-	:s(), entry_level(levels::all), min_level(levels::all), 
+	:s(), entry_level(levels::all), min_level(levels::all),
 	active(false)
 {
 
 }
 
 log::log(const char * filename)
-	:s(), entry_level(levels::all), min_level(levels::all), 
+	:s(), entry_level(levels::all), min_level(levels::all),
 	active(true)
 {
 	init(filename);
@@ -54,7 +54,7 @@ log::~log()
 
 //!Adds a timestamp.
 
-void log::activate() 
+void log::activate()
 {
 	active=true;
 	if(is_usable())
@@ -67,7 +67,7 @@ void log::activate()
 
 //!Adds a timestamp.
 
-void log::deactivate() 
+void log::deactivate()
 {
 	if(is_usable())
 	{
@@ -116,21 +116,21 @@ log& log::operator<<(lin lvl)
 	{
 		case lin::error:
 			s<<"[ERROR] ";
-			entry_level=error; 
+			entry_level=error;
 		break;
 		case lin::warning:
 			s<<"[WARNING] ";
-			entry_level=warning; 
+			entry_level=warning;
 		break;
 		case lin::info:
 			s<<"[INFO] ";
-			entry_level=info; 
+			entry_level=info;
 		break;
 	}
 	return *this;
 }
 
-//!Sets the minimum level. 
+//!Sets the minimum level.
 
 //!Error will show only errors, warning will show errors and warnings, etc.
 
@@ -165,7 +165,7 @@ log& log::operator<<(ltime v)
 			break;
 		}
 	}
-	
+
 	return *this;
 }
 
@@ -173,6 +173,11 @@ log& log::operator<<(ltime v)
 
 std::string log::time() const
 {
+	/*TODO
+	std::time_t t = std::time(nullptr);
+	std::tm tm = *std::localtime(&t);
+	out<<"\n"<<"0\n"<<std::put_time(&tm, "%H:%M:%S %d/%m/%Y");
+	*/
 	char * t=new char[14];
 	memset(t, '\0', 14);
 	time_t tiempo=std::time(nullptr);
