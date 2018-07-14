@@ -13,14 +13,14 @@ lcut	log::int_to_lcut(int v) {
 		case warning: 	return lcut::warning; break;
 		case info: return lcut::info; break;
 		case all: 	return lcut::all; break;
-	}	
+	}
 
 	//Compiler: just shut up.
 	return lcut::all;
 }
 
 log::log()
-	:s(), entry_level(levels::all), min_level(levels::all), 
+	:s(), entry_level(levels::all), min_level(levels::all),
 	active(false) {
 
 }
@@ -41,7 +41,6 @@ log::~log() {
 }
 
 void log::activate() {
-
 	active=true;
 	if(is_usable()) {
 		(*this)<<"Session starts "<<ltime::datetime<<std::endl;
@@ -81,22 +80,22 @@ log& log::operator<<(lin lvl) {
 	{
 		case lin::error:
 			s<<"[ERROR] ";
-			entry_level=error; 
+			entry_level=error;
 		break;
 		case lin::warning:
 			s<<"[WARNING] ";
-			entry_level=warning; 
+			entry_level=warning;
 		break;
 		case lin::info:
 			s<<"[INFO] ";
-			entry_level=info; 
+			entry_level=info;
 		break;
 	}
 	return *this;
 }
 
-log& log::operator<<(lcut lvl)
-{
+log& log::operator<<(lcut lvl) {
+
 	switch(lvl)
 	{
 		case lcut::error: 	min_level=error; break;
@@ -122,12 +121,16 @@ log& log::operator<<(ltime v) {
 			break;
 		}
 	}
-	
+
 	return *this;
 }
 
-//TODO: There are C++ ways of doing this.
 std::string log::time() const {
+	/*TODO
+	std::time_t t = std::time(nullptr);
+	std::tm tm = *std::localtime(&t);
+	out<<"\n"<<"0\n"<<std::put_time(&tm, "%H:%M:%S %d/%m/%Y");
+	*/
 	char * t=new char[14];
 	memset(t, '\0', 14);
 	time_t tiempo=std::time(nullptr);
@@ -139,6 +142,7 @@ std::string log::time() const {
 
 //TODO: There are C++ ways of doing this.
 std::string log::date() const {
+
 	char * t=new char[14];
 	memset(t, '\0', 14);
 	time_t tiempo=std::time(nullptr);
