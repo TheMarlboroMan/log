@@ -1,0 +1,19 @@
+OPTIMIZATION=-O2
+#DEBUG=-g
+WARNING_FLAGS=-Wall -Wextra -Wundef -Wcast-align -Wwrite-strings -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wshadow -Woverloaded-virtual -Wfatal-errors -Werror
+
+
+THREAD_PATH=C:\Devel\mingw32-patches\thread
+CFLAGS=-c $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti -DWINCOMPIL=1 -I$(THREAD_PATH) -D_WIN32_WINNT=0x0600
+CC=g++
+
+all: objdir obj/log.o
+
+objdir:
+	if not exist "obj" mkdir obj;
+
+obj/log.o: src/log.h src/log.cpp
+	$(CC) $(CFLAGS) src/log.cpp -o obj/log.o
+
+clean:
+	del obj/*; rmdir obj;
