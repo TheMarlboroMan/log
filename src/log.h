@@ -9,12 +9,6 @@
 #include <cstring>
 #include <mutex>
 
-#ifdef WINCOMPIL
-
-#include <mingw.mutex.h>
-
-#endif
-
 namespace tools
 {
 

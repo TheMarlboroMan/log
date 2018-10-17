@@ -146,7 +146,7 @@ std::string log::date() const {
 	char * t=new char[14];
 	memset(t, '\0', 14);
 	time_t tiempo=std::time(nullptr);
-	strftime(t, 14, "%F", localtime(&tiempo));
+	strftime(t, 14, "%Y-%m-%d", localtime(&tiempo));
 	std::string res(t);
 	delete [] t ;
 	return res;
