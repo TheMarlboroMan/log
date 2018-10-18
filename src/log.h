@@ -13,9 +13,9 @@ namespace tools
 {
 
 //!Types of input.
-enum class lin{error, warning, info};
+enum class lin{error, warning, info, debug};
 //!Input cut.
-enum class lcut{error, warning, info, all};
+enum class lcut{error, warning, info, debug, all};
 //!Locking for threads.
 enum class lop{lock, unlock};
 //!Time values.
@@ -25,7 +25,7 @@ enum class ltime{date, time, datetime};
 
 //!The log allows for four levels (all, info, warning, error) of input, but
 //!can be cut at any level to produce smaller files. It also has locking
-//!capabilities for multithreading and date/time formats. Logs might be 
+//!capabilities for multithreading and date/time formats. Logs might be
 //!inactive, on which case operations can be called upon them, but no logging
 //!will happen.
 
@@ -34,7 +34,7 @@ class log
 	public:
 
 	//!This enum just bitwises the levels.
-	enum levels{all=0, info=1, warning=2, error=4};
+	enum levels{all=0, debug=1, info=2, warning=4, error=8};
 
 	//!Converts integer to lcut values.
 	lcut int_to_lcut(int v);
@@ -113,9 +113,9 @@ class log
 	std::string				time() const;
 
 	std::mutex				mtx;		//!< Internal mutex for multithreaded logging.
-	std::ofstream 				s;		//!< Internal output file stream.
+	std::ofstream 			s;		//!< Internal output file stream.
 	int 					entry_level,	//!< Current log level.
-						min_level;	//!< Current minimum level to warrant logging.
+							min_level;	//!< Current minimum level to warrant logging.
 	bool 					active;		//!< Active flag.
 };
 

@@ -2,17 +2,17 @@
 
 using namespace tools;
 
-lcut	log::int_to_lcut(int v) {
+lcut	log::int_to_lcut(int _v) {
 
-	if(v < 0 || v > 3) {
-		throw std::runtime_error("Invalid cut level "+std::to_string(v)+" specified for int_to_lcut");
-	}
-
-	switch(v) {
+	switch(_v) {
 		case error: 	return lcut::error; break;
 		case warning: 	return lcut::warning; break;
-		case info: return lcut::info; break;
-		case all: 	return lcut::all; break;
+		case info: 		return lcut::info; break;
+		case debug: 	return lcut::debug; break;
+		case all: 		return lcut::all; break;
+		default:
+			throw std::runtime_error("Invalid cut level "+std::to_string(_v)+" specified for int_to_lcut");
+		break;
 	}
 
 	//Compiler: just shut up.
@@ -26,7 +26,7 @@ log::log()
 }
 
 log::log(const char * filename)
-	:s(), entry_level(levels::all), min_level(levels::all), 
+	:s(), entry_level(levels::all), min_level(levels::all),
 	active(true) {
 
 	init(filename);
@@ -76,8 +76,8 @@ log& log::operator<<(lop op) {
 }
 
 log& log::operator<<(lin lvl) {
-	switch(lvl)
-	{
+
+	switch(lvl) {
 		case lin::error:
 			s<<"[ERROR] ";
 			entry_level=error;
@@ -90,17 +90,21 @@ log& log::operator<<(lin lvl) {
 			s<<"[INFO] ";
 			entry_level=info;
 		break;
+		case lin::debug:
+			s<<"[DEBUG] ";
+			entry_level=debug;
+		break;
 	}
 	return *this;
 }
 
 log& log::operator<<(lcut lvl) {
 
-	switch(lvl)
-	{
+	switch(lvl) {
 		case lcut::error: 	min_level=error; break;
 		case lcut::warning:	min_level=warning; break;
 		case lcut::info:	min_level=info; break;
+		case lcut::debug:	min_level=debug; break;
 		case lcut::all:		min_level=all; break;
 	}
 	return *this;
