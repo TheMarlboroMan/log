@@ -1,4 +1,4 @@
-obj
-obj/*
+objects
+objects/*
 ./a.out
 *.gch

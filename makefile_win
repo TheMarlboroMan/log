@@ -1,11 +1,17 @@
-OPTIMIZATION=-O2
-#DEBUG=-g
-WARNING_FLAGS=-Wall -Wextra -Wundef -Wcast-align -Wwrite-strings -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wshadow -Woverloaded-virtual -Wfatal-errors -Werror
-CFLAGS=-c $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti -DWINCOMPIL=1 
-CC=g++
-
+#Machine specifics.
 DIR_O=objects
+
+#Commands.
 CLEAN=if exist $(DIR_O) rmdir $(DIR_O) /S /Q
 CREATE_OBJ_DIR=	if not exist "$(DIR_O)" mkdir $(DIR_O);
+
+#Build specifics.
+OPTIMIZATION=-O2
+#DEBUG=-g
+
+#Fixed compiler definitions.
+CC=g++
+WARNING_FLAGS=-Wall -Wextra -Wundef -Wcast-align -Wwrite-strings -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wshadow -Woverloaded-virtual -Wfatal-errors -Werror
+CFLAGS=-c $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti -DWINCOMPIL=1 
 	
 include makefile_comun

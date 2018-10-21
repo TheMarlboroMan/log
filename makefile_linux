@@ -1,11 +1,17 @@
-OPTIMIZATION=-O2
-#DEBUG=-g
-WARNING_FLAGS=-Wall -Wextra -Wundef -Wcast-align -Wwrite-strings -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wshadow -Woverloaded-virtual -Wfatal-errors -Werror
-CFLAGS=-c $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti
-CC=g++
-
+#Machine specifics.
 DIR_O=objects
+
+#Commands.
 CLEAN=rm -rf $(DIR_O)
 CREATE_OBJ_DIR=mkdir -p $(DIR_O)
+
+#Build specifics.
+OPTIMIZATION=-O2
+#DEBUG=-g
+
+#Fixed compiler definitions.
+CC=g++
+WARNING_FLAGS=-Wall -Wextra -Wundef -Wcast-align -Wwrite-strings -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wshadow -Woverloaded-virtual -Wfatal-errors -Werror
+CFLAGS=-c $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti
 
 include makefile_comun
