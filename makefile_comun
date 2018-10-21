@@ -1,0 +1,11 @@
+all: create_obj_dir $(DIR_O)/log.o
+	echo Done.
+
+create_obj_dir:
+	$(CREATE_OBJ_DIR)	
+
+clean:
+	$(CLEAN)
+
+$(DIR_O)/log.o: src\log.h src\log.cpp create_obj_dir
+	$(CC) $(CFLAGS) src/log.cpp -o $(DIR_O)/log.o

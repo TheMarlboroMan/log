@@ -1,18 +1,11 @@
 OPTIMIZATION=-O2
 #DEBUG=-g
 WARNING_FLAGS=-Wall -Wextra -Wundef -Wcast-align -Wwrite-strings -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wshadow -Woverloaded-virtual -Wfatal-errors -Werror
-
-
-CFLAGS=-c $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti -DWINCOMPIL=1
+CFLAGS=-c $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti -DWINCOMPIL=1 
 CC=g++
 
-all: objdir obj/log.o
-
-objdir:
-	if not exist "obj" mkdir obj;
-
-obj/log.o: src/log.h src/log.cpp
-	$(CC) $(CFLAGS) src/log.cpp -o obj/log.o
-
-clean:
-	del obj/*; rmdir obj;
+DIR_O=objects
+CLEAN=if exist $(DIR_O) rmdir $(DIR_O) /S /Q
+CREATE_OBJ_DIR=	if not exist "$(DIR_O)" mkdir $(DIR_O);
+	
+include makefile_comun
