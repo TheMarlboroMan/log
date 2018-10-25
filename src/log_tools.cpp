@@ -24,7 +24,8 @@ log& tools::debug(tools::log& _l) {
 	return _l;
 }
 
-void tools::endl(tools::log& _l) {
+lop tools::endl(tools::log& _l) {
 
-	_l<<std::endl<<lop::unlock;
+	_l<<std::endl;
+	return lop::unlock;
 }

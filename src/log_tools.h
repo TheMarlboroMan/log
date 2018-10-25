@@ -11,7 +11,7 @@ log& error(tools::log& srvlog);
 log& warning(tools::log& srvlog);
 log& info(tools::log& srvlog);
 log& debug(tools::log& srvlog);
-void endl(tools::log& srvlog);
+lop endl(tools::log& srvlog);
 }
 
 #endif
