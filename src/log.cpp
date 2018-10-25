@@ -2,7 +2,7 @@
 
 using namespace tools;
 
-lcut	log::int_to_lcut(int _v) {
+lcut log::int_to_lcut(int _v) const {
 
 	switch(_v) {
 		case none: 		return lcut::none; break;
@@ -20,7 +20,7 @@ lcut	log::int_to_lcut(int _v) {
 	return lcut::all;
 }
 
-int	log::lcut_to_int(lcut _v) {
+int	log::lcut_to_int(lcut _v) const {
 
 	switch(_v) {
 		case lcut::none: 	return none; break;

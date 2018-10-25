@@ -37,8 +37,8 @@ class log
 	enum levels{none=0, debug=1, info=2, warning=4, error=8, all=15};
 
 	//!Converts integer to lcut values.
-	lcut int_to_lcut(int v);
-	int lcut_to_int(lcut);
+	lcut int_to_lcut(int v) const;
+	int lcut_to_int(lcut) const;
 
 	//!Class constructor, creates an inactive log, with no file assigned.
 	log();
