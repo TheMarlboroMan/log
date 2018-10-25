@@ -5,6 +5,7 @@ using namespace tools;
 lcut	log::int_to_lcut(int _v) {
 
 	switch(_v) {
+		case none: 		return lcut::none; break;
 		case error: 	return lcut::error; break;
 		case warning: 	return lcut::warning; break;
 		case info: 		return lcut::info; break;
@@ -19,14 +20,32 @@ lcut	log::int_to_lcut(int _v) {
 	return lcut::all;
 }
 
+int	log::lcut_to_lcut(lcut _v) {
+
+	switch(_v) {
+		case lcut::none: 	return none; break;
+		case lcut::error: 	return error; break;
+		case lcut::warning: return warning; break;
+		case lcut::info: 	return info; break;
+		case lcut::debug: 	return debug; break;
+		case lcut::all: 	return all; break;
+		default:
+			throw std::runtime_error("Invalid cut level "+std::to_string(_v)+" specified for lcut_to_int");
+		break;
+	}
+
+	//Compiler: just shut up.
+	return all;
+}
+
 log::log()
-	:s(), entry_level(levels::all), min_level(levels::all),
+	:s(), entry_level(levels::all), allowed_levels(levels::all),
 	active(false) {
 
 }
 
 log::log(const char * filename)
-	:s(), entry_level(levels::all), min_level(levels::all),
+	:s(), entry_level(levels::all), allowed_levels(levels::all),
 	active(true) {
 
 	init(filename);
@@ -101,11 +120,12 @@ log& log::operator<<(lin lvl) {
 log& log::operator<<(lcut lvl) {
 
 	switch(lvl) {
-		case lcut::error: 	min_level=error; break;
-		case lcut::warning:	min_level=warning; break;
-		case lcut::info:	min_level=info; break;
-		case lcut::debug:	min_level=debug; break;
-		case lcut::all:		min_level=all; break;
+		case lcut::none: 	allowed_levels=none; break;
+		case lcut::error: 	allowed_levels=error; break;
+		case lcut::warning:	allowed_levels=warning; break;
+		case lcut::info:	allowed_levels=info; break;
+		case lcut::debug:	allowed_levels=debug; break;
+		case lcut::all:		allowed_levels=all; break;
 	}
 	return *this;
 }

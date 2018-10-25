@@ -15,7 +15,7 @@ namespace tools
 //!Types of input.
 enum class lin{error, warning, info, debug};
 //!Input cut.
-enum class lcut{error, warning, info, debug, all};
+enum class lcut{none, error, warning, info, debug, all};
 //!Locking for threads.
 enum class lop{lock, unlock};
 //!Time values.
@@ -34,10 +34,11 @@ class log
 	public:
 
 	//!This enum just bitwises the levels.
-	enum levels{all=0, debug=1, info=2, warning=4, error=8};
+	enum levels{none=0, debug=1, info=2, warning=4, error=8, all=15};
 
 	//!Converts integer to lcut values.
 	lcut int_to_lcut(int v);
+	int lcut_to_int(lcut);
 
 	//!Class constructor, creates an inactive log, with no file assigned.
 	log();
@@ -101,7 +102,7 @@ class log
 	private:
 
 	//!Checks if the current level can write.
-	bool					check_levels() {return entry_level >= min_level;}
+	bool					check_levels() {return entry_level & allowed_levels;}
 
 	//!Indicates if the file is open and the log is active.
 	bool 					is_usable() {return active && s.is_open();}
@@ -115,7 +116,7 @@ class log
 	std::mutex				mtx;		//!< Internal mutex for multithreaded logging.
 	std::ofstream 			s;		//!< Internal output file stream.
 	int 					entry_level,	//!< Current log level.
-							min_level;	//!< Current minimum level to warrant logging.
+							allowed_levels;	//!< Current levels to warrant logging.
 	bool 					active;		//!< Active flag.
 };
 
