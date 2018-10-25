@@ -118,6 +118,8 @@ class log
 	int 					entry_level,	//!< Current log level.
 							allowed_levels;	//!< Current levels to warrant logging.
 	bool 					active;		//!< Active flag.
+
+	friend					lop tools::endl(tools::log&);
 };
 
 }

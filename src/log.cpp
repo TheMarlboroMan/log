@@ -20,7 +20,7 @@ lcut	log::int_to_lcut(int _v) {
 	return lcut::all;
 }
 
-int	log::lcut_to_lcut(lcut _v) {
+int	log::lcut_to_int(lcut _v) {
 
 	switch(_v) {
 		case lcut::none: 	return none; break;
@@ -29,12 +29,8 @@ int	log::lcut_to_lcut(lcut _v) {
 		case lcut::info: 	return info; break;
 		case lcut::debug: 	return debug; break;
 		case lcut::all: 	return all; break;
-		default:
-			throw std::runtime_error("Invalid cut level "+std::to_string(_v)+" specified for lcut_to_int");
-		break;
 	}
 
-	//Compiler: just shut up.
 	return all;
 }
 
