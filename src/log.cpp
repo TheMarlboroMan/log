@@ -2,38 +2,6 @@
 
 using namespace tools;
 
-lcut log::int_to_lcut(int _v) const {
-
-	switch(_v) {
-		case none: 		return lcut::none; break;
-		case error: 	return lcut::error; break;
-		case warning: 	return lcut::warning; break;
-		case info: 		return lcut::info; break;
-		case debug: 	return lcut::debug; break;
-		case all: 		return lcut::all; break;
-		default:
-			throw std::runtime_error("Invalid cut level "+std::to_string(_v)+" specified for int_to_lcut");
-		break;
-	}
-
-	//Compiler: just shut up.
-	return lcut::all;
-}
-
-int	log::lcut_to_int(lcut _v) const {
-
-	switch(_v) {
-		case lcut::none: 	return none; break;
-		case lcut::error: 	return error; break;
-		case lcut::warning: return warning; break;
-		case lcut::info: 	return info; break;
-		case lcut::debug: 	return debug; break;
-		case lcut::all: 	return all; break;
-	}
-
-	return all;
-}
-
 log::log()
 	:s(), entry_level(levels::all), allowed_levels(levels::all),
 	active(false) {
@@ -113,16 +81,11 @@ log& log::operator<<(lin lvl) {
 	return *this;
 }
 
-log& log::operator<<(lcut lvl) {
+log& log::operator<<(lcut _lcut) {
 
-	switch(lvl) {
-		case lcut::none: 	allowed_levels=none; break;
-		case lcut::error: 	allowed_levels=error; break;
-		case lcut::warning:	allowed_levels=warning; break;
-		case lcut::info:	allowed_levels=info; break;
-		case lcut::debug:	allowed_levels=debug; break;
-		case lcut::all:		allowed_levels=all; break;
-	}
+	//TODO: Perhaps trimto valid values.
+
+	allowed_levels=_lcut.value;
 	return *this;
 }
 

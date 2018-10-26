@@ -14,8 +14,16 @@ namespace tools
 
 //!Types of input.
 enum class lin{error, warning, info, debug};
-//!Input cut.
-enum class lcut{none, error, warning, info, debug, all};
+
+struct lcut {
+					lcut(int _val):
+		value(_val){
+	}
+
+	int				value;
+};
+
+
 //!Locking for threads.
 enum class lop{lock, unlock};
 //!Time values.
@@ -35,10 +43,6 @@ class log
 
 	//!This enum just bitwises the levels.
 	enum levels{none=0, debug=1, info=2, warning=4, error=8, all=15};
-
-	//!Converts integer to lcut values.
-	lcut int_to_lcut(int v) const;
-	int lcut_to_int(lcut) const;
 
 	//!Class constructor, creates an inactive log, with no file assigned.
 	log();
@@ -82,7 +86,6 @@ class log
 	//!Sets the minimum level for the log to write data.
 
 	//!Error will show only errors, warning will show errors and warnings, etc.
-	//!See the lcut enum class for all possible input values
 	log& operator<<(lcut);
 
 	//!Adds the time, date or both to the output.
