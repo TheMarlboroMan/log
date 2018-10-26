@@ -25,10 +25,11 @@ log& tools::debug(tools::log& _l) {
 
 log& tools::quick_log(tools::log& _l, tools::lin _lin) {
 
+	_l<<tools::lop::lock;
 	ltagout tstatus=_l.tag_status;
 	_l<<ltagout::silent<<_lin;
 	if(_l.check_levels()) {
-		_l<<tools::lop::lock<<tstatus<<tools::ltime::datetime<<_lin;
+		_l<<tstatus<<tools::ltime::datetime<<_lin;
 	}
 
 	return _l<<tstatus;
