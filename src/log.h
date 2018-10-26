@@ -28,6 +28,8 @@ struct lcut {
 enum class lop{lock, unlock};
 //!Time values.
 enum class ltime{date, time, datetime};
+//!Verbose tag output
+enum class ltagout{verbose, silent};
 
 //!A basic log to file.
 
@@ -43,6 +45,7 @@ class log
 
 	//!This enum just bitwises the levels.
 	enum levels{none=0, debug=1, info=2, warning=4, error=8, all=15};
+	int lin_to_int(lin);
 
 	//!Class constructor, creates an inactive log, with no file assigned.
 	log();
@@ -64,8 +67,8 @@ class log
 
 	//!Inserts data into the log.
 	template <class X> log& operator<<(const X &input) {
-		if(is_usable() && check_levels())
-		{
+
+		if(is_usable() && check_levels()) {
 			s<<input;
 			s.flush();
 		}
@@ -78,7 +81,8 @@ class log
 	//!and unlocked when done.
 	log& operator<<(lop);
 
-	//!Sets the level of input, writing its tag to the output.
+	//!Sets if the tag will be printed when changing levels.
+	log& operator<<(ltagout);
 
 	//!See the lin enum class for all possible input values.
 	log& operator<<(lin);
@@ -106,6 +110,7 @@ class log
 
 	//!Checks if the current level can write.
 	bool					check_levels() {return entry_level & allowed_levels;}
+	bool					check_levels(int _lvl) {return _lvl & allowed_levels;}
 
 	//!Indicates if the file is open and the log is active.
 	bool 					is_usable() {return active && s.is_open();}
@@ -118,11 +123,13 @@ class log
 
 	std::mutex				mtx;		//!< Internal mutex for multithreaded logging.
 	std::ofstream 			s;		//!< Internal output file stream.
-	int 					entry_level,	//!< Current log level.
-							allowed_levels;	//!< Current levels to warrant logging.
-	bool 					active;		//!< Active flag.
+	int 					entry_level=levels::all,	//!< Current log level.
+							allowed_levels=levels::all;	//!< Current levels to warrant logging.
+	bool 					active=false;		//!< Active flag.
+	ltagout					tag_status=ltagout::verbose;
 
 	friend					lop tools::endl(tools::log&);
+	friend					log& quick_log(tools::log&, lin);
 };
 
 }

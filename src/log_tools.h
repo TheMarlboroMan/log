@@ -7,11 +7,12 @@ namespace tools {
 //!Pairs of "lock" and "unlock" quick accesors: tools::error()<<"my stuff "<<errno<<tools::endl();
 //!These also stamp the time.
 
-log& error(tools::log& srvlog);
-log& warning(tools::log& srvlog);
-log& info(tools::log& srvlog);
-log& debug(tools::log& srvlog);
-lop endl(tools::log& srvlog);
+log& error(tools::log&);
+log& warning(tools::log&);
+log& info(tools::log&);
+log& debug(tools::log&);
+lop endl(tools::log&);
+log& quick_log(tools::log&, tools::lin);
 }
 
 #endif

@@ -3,22 +3,21 @@
 using namespace tools;
 
 log::log()
-	:s(), entry_level(levels::all), allowed_levels(levels::all),
-	active(false) {
+	:s() {
 
 }
 
 log::log(const char * filename)
-	:s(), entry_level(levels::all), allowed_levels(levels::all),
-	active(true) {
+	:s() {
 
 	init(filename);
+	active=true;
 }
 
 log::~log() {
 
 	if(is_usable()) {
-		(*this)<<"Session ends "<<ltime::datetime<<std::endl;
+		(*this)<<ltime::datetime<<"Session ends"<<std::endl;
 		s.close();
 	}
 }
@@ -26,15 +25,14 @@ log::~log() {
 void log::activate() {
 	active=true;
 	if(is_usable()) {
-		(*this)<<"Session starts "<<ltime::datetime<<std::endl;
+		(*this)<<ltime::datetime<<"Session starts "<<std::endl;
 	}
 }
 
 void log::deactivate() {
 
-	if(is_usable())
-	{
-		(*this)<<"Session ends "<<ltime::datetime<<std::endl;
+	if(is_usable()) {
+		(*this)<<ltime::datetime<<"Session ends "<<std::endl;
 	}
 
 	active=false;
@@ -43,9 +41,8 @@ void log::deactivate() {
 void log::init(const char * filename) {
 	s.open(filename);
 
-	if(is_usable())
-	{
-		(*this)<<"Session starts "<<ltime::datetime<<std::endl;
+	if(is_usable())	{
+		(*this)<<ltime::datetime<<"Session starts "<<std::endl;
 	}
 }
 
@@ -58,32 +55,56 @@ log& log::operator<<(lop op) {
 	return *this;
 }
 
-log& log::operator<<(lin lvl) {
+int log::lin_to_int(lin _lin) {
 
-	switch(lvl) {
+	switch(_lin) {
+		case lin::error:	return levels::error;
+		case lin::warning:	return levels::warning;
+		case lin::info:		return levels::info;
+		case lin::debug:	return levels::debug;
+	}
+
+	return levels::all;
+}
+
+//TODO: How could we enable silent mode???
+log& log::operator<<(lin _lvl) {
+
+	std::string tag;
+
+	switch(_lvl) {
 		case lin::error:
-			s<<"[ERROR] ";
 			entry_level=error;
+			tag="[ERROR] ";
 		break;
 		case lin::warning:
-			s<<"[WARNING] ";
 			entry_level=warning;
+			tag="[WARNING] ";
 		break;
 		case lin::info:
-			s<<"[INFO] ";
 			entry_level=info;
+			tag="[INFO] ";
 		break;
 		case lin::debug:
-			s<<"[DEBUG] ";
 			entry_level=debug;
+			tag="[DEBUG] ";
 		break;
 	}
+
+	if(tag_status==ltagout::verbose && check_levels(lin_to_int(_lvl))) {
+		s<<tag;
+	}
+
+	return *this;
+}
+
+log& log::operator<<(ltagout _lt) {
+
+	tag_status=_lt;
 	return *this;
 }
 
 log& log::operator<<(lcut _lcut) {
-
-	//TODO: Perhaps trimto valid values.
 
 	allowed_levels=_lcut.value;
 	return *this;

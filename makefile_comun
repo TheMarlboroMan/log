@@ -21,3 +21,8 @@ $(DIR_O)/log.o\
 src/log_tools.h\
 src/log_tools.cpp
 	$(CC) $(CFLAGS) src/log_tools.cpp -o $(DIR_O)/log_tools.o
+
+a.out:\
+$(DIR_O)/log.o\
+$(DIR_O)/log_tools.o
+	$(CC) $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti main.cpp $(DIR_O)/log_tools.o $(DIR_O)/log.o
