@@ -25,7 +25,7 @@ log& tools::debug(tools::log& _l) {
 
 log& tools::quick_log(tools::log& _l, tools::lin _lin) {
 
-	_l<<tools::lop::lock;
+	_l<<llock{};
 	ltagout tstatus=_l.tag_status;
 	_l<<ltagout::silent<<_lin;
 	if(_l.check_levels()) {
@@ -35,11 +35,7 @@ log& tools::quick_log(tools::log& _l, tools::lin _lin) {
 	return _l<<tstatus;
 }
 
-//TODO: This is funky... Even if the mode is not allowed, we still print...
-lop tools::endl(tools::log& _l) {
+lunlocknl tools::endl() {
 
-	if(_l.check_levels()) {
-		_l<<"\n";
-	}
-	return lop::unlock;
+	return lunlocknl{};
 }

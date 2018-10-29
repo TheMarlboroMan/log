@@ -46,12 +46,22 @@ void log::init(const char * filename) {
 	}
 }
 
-log& log::operator<<(lop op) {
+log& log::operator<<(llock) {
 
-	switch(op) {
-		case lop::lock: 	mtx.lock(); break;
-		case lop::unlock: 	mtx.unlock(); break;
-	}
+	mtx.lock();
+	return *this;
+}
+
+log& log::operator<<(lunlock) {
+
+	mtx.unlock();
+	return *this;
+}
+
+log& log::operator<<(lunlocknl) {
+
+	*this<<std::endl;
+	mtx.unlock();
 	return *this;
 }
 

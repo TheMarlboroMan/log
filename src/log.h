@@ -25,7 +25,9 @@ struct lcut {
 
 
 //!Locking for threads.
-enum class lop{lock, unlock};
+struct llock{};
+struct lunlock{};
+struct lunlocknl{};
 //!Time values.
 enum class ltime{date, time, datetime};
 //!Verbose tag output
@@ -79,7 +81,9 @@ class log
 
 	//!In multithreaded environments, the log must be locked before writing
 	//!and unlocked when done.
-	log& operator<<(lop);
+	log& operator<<(llock);
+	log& operator<<(lunlock);
+	log& operator<<(lunlocknl);
 
 	//!Sets if the tag will be printed when changing levels.
 	log& operator<<(ltagout);
@@ -128,7 +132,8 @@ class log
 	bool 					active=false;		//!< Active flag.
 	ltagout					tag_status=ltagout::verbose;
 
-	friend					lop tools::endl(tools::log&);
+	friend					lunlock tools::endl(tools::log&);
+	friend					log& tools::endln(tools::log&);
 	friend					log& quick_log(tools::log&, lin);
 };
 

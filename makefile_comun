@@ -25,4 +25,4 @@ src/log_tools.cpp
 a.out:\
 $(DIR_O)/log.o\
 $(DIR_O)/log_tools.o
-	$(CC) $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti main.cpp $(DIR_O)/log_tools.o $(DIR_O)/log.o
+	$(CC) $(DEBUG) $(OPTIMIZATION) $(WARNING_FLAGS) -ansi -pedantic -std=c++11 -fno-rtti -pthread main.cpp $(DIR_O)/log_tools.o $(DIR_O)/log.o

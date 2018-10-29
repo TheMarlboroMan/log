@@ -11,7 +11,7 @@ log& error(tools::log&);
 log& warning(tools::log&);
 log& info(tools::log&);
 log& debug(tools::log&);
-lop endl(tools::log&);
+lunlocknl endl();
 log& quick_log(tools::log&, tools::lin);
 }
 
