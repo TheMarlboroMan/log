@@ -40,7 +40,7 @@ void log::deactivate() {
 
 void log::init(const char * filename) {
 
-	connect_file();
+	open_file();
 
 	if(is_usable())	{
 		(*this)<<ltime::datetime<<"Session starts "<<std::endl;
