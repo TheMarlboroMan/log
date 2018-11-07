@@ -64,6 +64,12 @@ class log
 	//!Dectivates the log. Adds a timestamp to indicate that the session ended.
 	void deactivate();
 
+	//!Opens the file. Returns true if the operation could be carried out, false if nothing happened. Used internally, but also used very specifically to close the handle and be able to rotate the logs in linux systems.
+	bool open_file();
+
+	//!Closes the file. Same as open_file.
+	bool close_file();
+
 	//!Inits the log, opening the file. Adds a timestamp to indicate that the session started.
 	void init(const char * filename);
 

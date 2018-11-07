@@ -18,7 +18,7 @@ log::~log() {
 
 	if(is_usable()) {
 		(*this)<<ltime::datetime<<"Session ends"<<std::endl;
-		s.close();
+		close_file();
 	}
 }
 
@@ -39,11 +39,32 @@ void log::deactivate() {
 }
 
 void log::init(const char * filename) {
-	s.open(filename);
+
+	connect_file();
 
 	if(is_usable())	{
 		(*this)<<ltime::datetime<<"Session starts "<<std::endl;
 	}
+}
+
+bool log::open_file() {
+
+	if(!s.is_open()) {
+		s.open(filename);
+		return true;
+	}
+
+	return false;
+}
+
+bool log::close_file() {
+
+	if(s.is_open()) {
+		s.close();
+		return true;
+	}
+
+	return false;
 }
 
 log& log::operator<<(llock) {
