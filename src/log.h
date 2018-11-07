@@ -131,6 +131,7 @@ class log
 	//!Creates a string with the system time.
 	std::string				time() const;
 
+	std::string				filename;
 	std::mutex				mtx;		//!< Internal mutex for multithreaded logging.
 	std::ofstream 			s;		//!< Internal output file stream.
 	int 					entry_level=levels::all,	//!< Current log level.

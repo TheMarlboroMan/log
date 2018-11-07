@@ -7,10 +7,10 @@ log::log()
 
 }
 
-log::log(const char * filename)
+log::log(const char * _filename)
 	:s() {
 
-	init(filename);
+	init(_filename);
 	active=true;
 }
 
@@ -38,7 +38,9 @@ void log::deactivate() {
 	active=false;
 }
 
-void log::init(const char * filename) {
+void log::init(const char * _filename) {
+
+	filename=_filename;
 
 	open_file();
 
@@ -98,7 +100,6 @@ int log::lin_to_int(lin _lin) {
 	return levels::all;
 }
 
-//TODO: How could we enable silent mode???
 log& log::operator<<(lin _lvl) {
 
 	std::string tag;
