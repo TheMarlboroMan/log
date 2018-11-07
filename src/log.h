@@ -70,6 +70,11 @@ class log
 	//!Closes the file. Same as open_file.
 	bool close_file();
 
+	//!Returns true if the file is open. Part of the open/close file family of methods.
+	bool is_file_open() const {
+		return s.is_open();
+	}
+
 	//!Inits the log, opening the file. Adds a timestamp to indicate that the session started.
 	void init(const char * filename);
 
@@ -119,11 +124,11 @@ class log
 	private:
 
 	//!Checks if the current level can write.
-	bool					check_levels() {return entry_level & allowed_levels;}
-	bool					check_levels(int _lvl) {return _lvl & allowed_levels;}
+	bool					check_levels() const {return entry_level & allowed_levels;}
+	bool					check_levels(int _lvl) const {return _lvl & allowed_levels;}
 
 	//!Indicates if the file is open and the log is active.
-	bool 					is_usable() {return active && s.is_open();}
+	bool 					is_usable() const {return active && is_file_open();}
 
 	//!Creates a string with the system date.
 	std::string				date() const;
