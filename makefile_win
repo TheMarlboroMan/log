@@ -2,7 +2,7 @@
 DIR_O=objects
 
 #Commands.
-CLEAN=if exist $(DIR_O) rmdir /S /Q $(DIR_O);
+CLEAN=if exist $(DIR_O) rmdir /S /Q $(DIR_O) && if exist liblog.a rm liblog.a
 CREATE_OBJ_DIR=	if not exist "$(DIR_O)" mkdir $(DIR_O);
 
 #Build specifics.

@@ -2,7 +2,7 @@
 DIR_O=objects
 
 #Commands.
-CLEAN=rm -rf $(DIR_O)
+CLEAN=if [ -d $(DIR_O) ]; then rm -rf $(DIR_O); fi; if [ -f liblog.a ]; then rm liblog.a; fi;
 CREATE_OBJ_DIR=mkdir -p $(DIR_O)
 
 #Build specifics.

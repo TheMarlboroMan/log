@@ -1,5 +1,6 @@
 objects
 objects/*
 a.out
+liblog.a
 *.gch
 testlog.log
