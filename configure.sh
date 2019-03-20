@@ -1,5 +1,7 @@
 #!/bin/bash
 
+makefile_name=makefile;
+
 while true; do
 	echo -n "With optimizations (y/n): "
 	read with_optimizations;
@@ -18,9 +20,9 @@ while true; do
 	esac;
 done;
 
-cp make/linux.template ./makefile_linux;
+cp make/linux.template ./$makefile_name;
 
-sed -i -e "s/__TEMPLATE_OPTIMIZATION__/$optimizations/g" ./makefile_linux;
-sed -i -e "s/__TEMPLATE_DEBUG__/$debug/g" ./makefile_linux;
+sed -i -e "s/__TEMPLATE_OPTIMIZATION__/$optimizations/g" ./$makefile_name;
+sed -i -e "s/__TEMPLATE_DEBUG__/$debug/g" ./$makefile_name;
 
 echo "Done";
