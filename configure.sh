@@ -25,4 +25,12 @@ cp make/linux.template ./$makefile_name;
 sed -i -e "s/__TEMPLATE_OPTIMIZATION__/$optimizations/g" ./$makefile_name;
 sed -i -e "s/__TEMPLATE_DEBUG__/$debug/g" ./$makefile_name;
 
-echo "Done";
+while true; do
+
+	echo -n "Start compilation? (y/n): "
+	read compile;
+	case $compile in
+		[y] ) make clean; make all; echo "Done"; break;;
+		[n] ) break;;
+	esac;
+done;

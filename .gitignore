@@ -1,5 +1,7 @@
 obj
 obj/*
+objects/
+objects/*
 a.out
 liblog.a
 *.gch
