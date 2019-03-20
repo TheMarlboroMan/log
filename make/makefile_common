@@ -2,7 +2,7 @@ all:\
 create_obj_dir\
 $(DIR_O)/log.o\
 $(DIR_O)/log_tools.o
-	ar rcs liblog.a $(DIR_O)/log.o $(DIR_O)/log_tools.o	
+	ar rcs liblog.a $(DIR_O)/log.o $(DIR_O)/log_tools.o
 
 create_obj_dir:
 	$(CREATE_OBJ_DIR)

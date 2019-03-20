@@ -1,6 +1,7 @@
-objects
-objects/*
+obj
+obj/*
 a.out
 liblog.a
 *.gch
 testlog.log
+makefile_linux
