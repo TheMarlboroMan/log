@@ -7,3 +7,4 @@ liblog.a
 *.gch
 testlog.log
 makefile
+makefile_linux
