@@ -12,6 +12,7 @@
 namespace tools
 {
 
+
 //!Types of input.
 enum class lin{error, warning, info, debug};
 
@@ -28,6 +29,12 @@ struct lcut {
 struct llock{};
 struct lunlock{};
 struct lunlocknl{};
+
+//Forwards, gcc8
+class log;
+lunlock endl(log&);
+log& endln(log&);
+
 //!Time values.
 enum class ltime{date, time, datetime};
 //!Verbose tag output
@@ -40,6 +47,7 @@ enum class ltagout{verbose, silent};
 //!capabilities for multithreading and date/time formats. Logs might be
 //!inactive, on which case operations can be called upon them, but no logging
 //!will happen.
+
 
 class log
 {
@@ -144,8 +152,8 @@ class log
 	bool 					active=false;		//!< Active flag.
 	ltagout					tag_status=ltagout::verbose;
 
-	friend					lunlock tools::endl(tools::log&);
-	friend					log& tools::endln(tools::log&);
+	friend					lunlock endl(tools::log&);
+	friend					log& endln(tools::log&);
 	friend					log& quick_log(tools::log&, lin);
 };
 
