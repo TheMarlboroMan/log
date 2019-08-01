@@ -23,6 +23,10 @@ function y_n_choice() {
 	done;
 }
 
+#params: value to be evaluated, value to be returned if the "y", value to
+#be returned if "n". 
+#return code: none
+#reference return: uses __retval
 function y_n_to_value() {
 
 	case $1 in
@@ -36,8 +40,6 @@ function help() {
 
 	echo "./configure [optimizations] [debug] [cppstd] [compile y/n]"
 	echo "ex. ./configure y n n y"
-
-
 }
 
 optimizations_y="OPTIMIZATION=-O2"
@@ -67,7 +69,7 @@ if [ "$#" -ne 0 ]; then
 	y_n_to_value $4 "1" "0";
 	compile=$__retval;
 
-	if [ "-1" == $optimizations ] || [ "-1" == $debug ] || [ "-1" == $cpprev ] | [ "-1" == $compile ]; then
+	if [ "-1" == $optimizations ] || [ "-1" == $debug ] || [ "-1" == $cpprev ] || [ "-1" == $compile ]; then
 		echo "invalid parameters"
 		exit 2;
 	fi;
