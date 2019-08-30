@@ -1,0 +1,8 @@
+set(SOURCE
+   ${SOURCE}
+   ${CMAKE_CURRENT_SOURCE_DIR}/log_tools.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/log_tools.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/log.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/log.h
+   PARENT_SCOPE
+)

@@ -8,3 +8,4 @@ liblog.a
 testlog.log
 makefile
 makefile_linux
+build
