@@ -10,6 +10,13 @@ add_compile_options(-Wall -Wextra -Wundef -Wcast-align -Wwrite-strings -Wlogical
 add_compile_options(-std=c++11)
 
 #TODO: Add the rest of flags...
+#optimizations_y="OPTIMIZATION=-O2"
+#optimizations_n="#OPTIMIZATION=-O2"
+#debug_y="DEBUG=-g"
+#debug_n="#DEBUG=-g"
+#cpp14_y="CPPREV=-std=c++14" 
+#	cpp14_n="CPPREV=-std=c++11"
+
 
 set(SOURCE "")
 
