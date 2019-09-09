@@ -11,7 +11,10 @@ class logger {
 	public:
 
 	//TODO: Document.
-	//TODO: Kind of makes you wonder if this does really make any sense...
+	//TODO: These should not be virtual, perhaps they just should to 
+	/*
+		return (*this)<<ltime<<lin::emergency;
+	*/
 	virtual logger& emergency()=0;
 	virtual logger& alert()=0;
 	virtual logger& critical()=0;

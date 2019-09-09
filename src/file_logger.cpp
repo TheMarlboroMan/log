@@ -20,6 +20,7 @@ logger& file_logger::operator<<(lin _lvl) {
 	std::string tag=lin_to_tag(_lvl);
 	entry_level=lin_to_int(_lvl);
 
+	//TODO: This makes no sense anymore, all tagout stuff can be removed...
 	if(tag_status==ltagout::verbose && check_levels(lin_to_int(_lvl))) {
 		s<<tag;
 	}
@@ -27,6 +28,7 @@ logger& file_logger::operator<<(lin _lvl) {
 	return *this;
 }
 
+//TODO: Can be removed.
 logger& file_logger::operator<<(ltagout _lt) {
 
 	tag_status=_lt;
