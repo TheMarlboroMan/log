@@ -27,6 +27,6 @@ install(TARGETS log DESTINATION /usr/lib)
 install(DIRECTORY src/ DESTINATION include/log FILES_MATCHING PATTERN "*.h")
 
 if(${BUILD_EXAMPLES})
-	add_executable(main examples/main.cpp)
-	target_link_libraries(main log pthread)
+	add_executable(multithreading examples/multithreading.cpp)
+	target_link_libraries(multithreading log pthread)
 endif()

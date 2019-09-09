@@ -14,7 +14,7 @@ namespace tools
 
 
 //!Types of input.
-enum class lin{error, warning, info, debug};
+enum class lin{emergency, alert, critical, error, warning, notice, info, debug};
 
 struct lcut {
 					lcut(int _val):
@@ -54,7 +54,7 @@ class log
 	public:
 
 	//!This enum just bitwises the levels.
-	enum levels{none=0, debug=1, info=2, warning=4, error=8, all=15};
+	enum levels{none=0, debug=1, info=2, notice=4, warning=8, error=16, critical=32, alert=64, emergency=128, all=255};
 	int lin_to_int(lin);
 
 	//!Class constructor, creates an inactive log, with no file assigned.

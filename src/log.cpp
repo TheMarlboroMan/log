@@ -91,10 +91,14 @@ log& log::operator<<(lunlocknl) {
 int log::lin_to_int(lin _lin) {
 
 	switch(_lin) {
-		case lin::error:	return levels::error;
-		case lin::warning:	return levels::warning;
-		case lin::info:		return levels::info;
-		case lin::debug:	return levels::debug;
+		case lin::emergency:	return levels::emergency;
+		case lin::alert:		return levels::alert;
+		case lin::critical:		return levels::critical;
+		case lin::error:		return levels::error;
+		case lin::warning:		return levels::warning;
+		case lin::notice:		return levels::notice;
+		case lin::info:			return levels::info;
+		case lin::debug:		return levels::debug;
 	}
 
 	return levels::all;
@@ -105,6 +109,18 @@ log& log::operator<<(lin _lvl) {
 	std::string tag;
 
 	switch(_lvl) {
+		case lin::emergency:
+			entry_level=emergency;
+			tag="[EMERGENCY] ";
+		break;
+		case lin::alert:
+			entry_level=alert;
+			tag="[ALERT] ";
+		break;
+		case lin::critical:
+			entry_level=critical;
+			tag="[CRITICAL] ";
+		break;
 		case lin::error:
 			entry_level=error;
 			tag="[ERROR] ";
@@ -112,6 +128,10 @@ log& log::operator<<(lin _lvl) {
 		case lin::warning:
 			entry_level=warning;
 			tag="[WARNING] ";
+		break;
+		case lin::notice:
+			entry_level=notice;
+			tag="[NOTICE] ";
 		break;
 		case lin::info:
 			entry_level=info;

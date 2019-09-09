@@ -2,6 +2,20 @@
 
 using namespace tools;
 
+log& tools::emergency(tools::log& _l) {
+
+	return quick_log(_l, tools::lin::emergency);
+}
+
+log& tools::alert(tools::log& _l) {
+
+	return quick_log(_l, tools::lin::alert);
+}
+
+log& tools::critical(tools::log& _l) {
+
+	return quick_log(_l, tools::lin::critical);
+}
 
 log& tools::error(tools::log& _l) {
 
@@ -11,6 +25,11 @@ log& tools::error(tools::log& _l) {
 log& tools::warning(tools::log& _l) {
 
 	return quick_log(_l, tools::lin::warning);
+}
+
+log& tools::notice(tools::log& _l) {
+
+	return quick_log(_l, tools::lin::notice);
 }
 
 log& tools::info(tools::log& _l) {

@@ -19,7 +19,14 @@ struct worker {
 	void 				work() {
 
 		while(running) {
-			tools::info(wl)<<"This is "<<name<<" saying hello"<<tools::endl();
+			tools::debug(wl)<<"This is "<<name<<" saying debug"<<tools::endl();
+			tools::info(wl)<<"This is "<<name<<" saying info"<<tools::endl();
+			tools::notice(wl)<<"This is "<<name<<" saying notice"<<tools::endl();
+			tools::warning(wl)<<"This is "<<name<<" saying warning"<<tools::endl();
+			tools::error(wl)<<"This is "<<name<<" saying error"<<tools::endl();
+			tools::critical(wl)<<"This is "<<name<<" saying critical"<<tools::endl();
+			tools::alert(wl)<<"This is "<<name<<" saying alert"<<tools::endl();
+			tools::emergency(wl)<<"This is "<<name<<" saying emergency"<<tools::endl();
 		}
 	}
 
