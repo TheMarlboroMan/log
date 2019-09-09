@@ -1,8 +1,10 @@
 set(SOURCE
    ${SOURCE}
-   ${CMAKE_CURRENT_SOURCE_DIR}/log_tools.cpp
-   ${CMAKE_CURRENT_SOURCE_DIR}/log_tools.h
-   ${CMAKE_CURRENT_SOURCE_DIR}/log.cpp
-   ${CMAKE_CURRENT_SOURCE_DIR}/log.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/locking_actions.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/locking_actions.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/file_logger.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/file_logger.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/tools.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/tools.h
    PARENT_SCOPE
 )
