@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(BUILD_STATIC "By default, a shared library is built. Set to on to switch to a static library" OFF)
-option(BUILD_EXAMPLES "Build example code" OFF)
+option(BUILD_EXAMPLES "Build example code" ON)
 
 #option(CREATE_DOCS "Build library documentation (requires Doxygen and Graphviz/Dot to be installed)" OFF)
 
@@ -28,5 +28,5 @@ install(DIRECTORY src/ DESTINATION include/log FILES_MATCHING PATTERN "*.h")
 
 if(${BUILD_EXAMPLES})
 	add_executable(main examples/main.cpp)
-	target_link_libraries(main log)
+	target_link_libraries(main log pthread)
 endif()

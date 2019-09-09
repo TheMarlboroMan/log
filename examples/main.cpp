@@ -1,9 +1,10 @@
-#include "src/log.h"
-#include "src/log_tools.h"
+#include "../src/log.h"
+#include "../src/log_tools.h"
 
 #include <thread>
 #include <string>
 #include <vector>
+#include <chrono>
 
 using namespace tools;
 log wl("testlog.log");
@@ -50,12 +51,14 @@ int main(int, char **) {
 		threads.push_back(std::thread(&worker::work, std::ref(w)));
 	}
 
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	running=false;
+
 	for(auto& t : threads) {
 		t.join();
 	}
 
-	return 1;
-
+	return 0;
 }
 
 /*
