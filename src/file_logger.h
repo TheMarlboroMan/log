@@ -10,6 +10,10 @@
 
 namespace log {
 
+//TODO: All logs should be an implementation of basic_log: something with a
+//streamlike thing. The trick here is to be really clear about the whole
+//hierarchy and to know that maybe all we need is a template class...
+
 //!A basic log to file.
 
 //!The log allows for all log levels of input, but can be cut at any level to 
