@@ -24,7 +24,11 @@ class sentry {
 	//!from the log_base class.
 								sentry(const sentry&);
 								~sentry();
-
+        //TODO: reject this approach: the template thing is
+        //taking us through weird hoops. Have N overloads
+        //for N basic types and one for loggable. 
+        //have 2 underlying buffers that satisfy them, one
+        //mute and one not.
 	template<class T> 
 	sentry&		 				operator<<(const T& _value) {
 
