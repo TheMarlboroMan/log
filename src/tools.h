@@ -1,5 +1,4 @@
-#ifndef LOG_TOOLS_H
-#define LOG_TOOLS_H
+#pragma once
 
 #include "definitions.h"
 
@@ -17,5 +16,3 @@ std::string time();
 
 const char * lin_to_tag(lin);
 }
-
-#endif

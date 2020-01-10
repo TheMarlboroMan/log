@@ -1,5 +1,4 @@
-#ifndef TOOLS_LOG_H
-#define TOOLS_LOG_H
+#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -29,40 +28,6 @@ class file_logger
 	//!Class destructor. Adds a timestamp to the log file if possible (like deactivate).
 	~file_logger();
 
-	//TODO: These should also stamp the time and shit.
-
-	logger& emergency() {
-		return (*this)<<lin::emergency;
-	}
-	
-	logger& alert() {
-		return (*this)<<lin::alert;
-	}
-
-	logger& critical() {
-		return (*this)<<lin::critical;
-	}
-
-	logger& error() {
-		return (*this)<<lin::error;
-	}
-
-	logger& warning() {
-		return (*this)<<lin::warning;
-	}
-
-	logger& notice() {
-		return (*this)<<lin::notice;
-	}
-
-	logger& info() {
-		return (*this)<<lin::info;
-	}
-
-	logger& debug() {
-		return (*this)<<lin::debug;
-	}
-
 	virtual logger& operator<<(const char * _input) {return insert(_input);}
 	virtual logger& operator<<(int _input) {return insert(_input);}
 	virtual logger& operator<<(double _input) {return insert(_input);}
@@ -81,9 +46,6 @@ class file_logger
 		return *this;
 	}
 */
-
-	//!Sets if the tag will be printed when changing levels.
-	logger& operator<<(ltagout);
 
 	//!See the lin enum class for all possible input values.
 	logger& operator<<(lin);
@@ -125,7 +87,6 @@ class file_logger
 	std::ofstream 			s;		//!< Internal output file stream.
 	int 					entry_level=levels::all,	//!< Current log level.
 							allowed_levels=levels::all;	//!< Current levels to warrant logging.	
-	ltagout					tag_status=ltagout::verbose;};
+};
 
 }
-#endif

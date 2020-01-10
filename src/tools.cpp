@@ -24,19 +24,31 @@ int log::lin_to_int(lin _lin) {
 const char * log::lin_to_tag(lin _lin) {
 
 	switch(_lin) {
-		case lin::emergency:	return "[emergency]";
-		case lin::alert:		return "[alert]";
-		case lin::critical:		return "[critical]";
-		case lin::error:		return "[error]";
-		case lin::warning:		return "[warning]";
-		case lin::notice:		return "[notice]";
-		case lin::info:			return "[info]";
-		case lin::debug:		return "[debug]";
+		case lin::emergency:	return "emergency";
+		case lin::alert:		return "alert";
+		case lin::critical:		return "critical";
+		case lin::error:		return "error";
+		case lin::warning:		return "warning";
+		case lin::notice:		return "notice";
+		case lin::info:			return "info";
+		case lin::debug:		return "debug";
 	}
 
-	return "[???]";
+	return "???";
 }
+/*
+TODO: Erase this when the time comes...
+std::string log::ldate_to_str(ltime _val, ltime _default) {
 
+	switch(_val) {
+		case ltime::time:		return time();
+		case ltime::date:		return date();
+		case ltime::datetime: 	return date()+" "+time();
+		case ltime::none:		return std::string();
+		case ltime::def:		return ldate_to_str(_default, _default);
+	}
+}
+*/
 std::string log::time() {
 	/*TODO
 	std::time_t t = std::time(nullptr);
@@ -63,3 +75,5 @@ std::string log::date() {
 	delete [] t ;
 	return res;
 }
+
+

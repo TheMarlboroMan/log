@@ -20,17 +20,14 @@ struct worker {
 
 		while(running) {
 
-			//TODO: perhaps this: lock, stamp moment, stamp type of tag...
-			//perhaps log::lock(wl, lin::debug)
-
-			log::lock(wl)<<lin::debug<<"This is "<<name<<" saying debug"<<std::endl;			
-			log::lock(wl)<<lin::info<<"This is "<<name<<" saying info"<<std::endl;
-			log::lock(wl)<<lin::notice<<"This is "<<name<<" saying notice"<<std::endl;
-			log::lock(wl)<<lin::warning<<"This is "<<name<<" saying warning"<<std::endl;
-			log::lock(wl)<<lin::error<<"This is "<<name<<" saying error"<<std::endl;
-			log::lock(wl)<<lin::critical<<"This is "<<name<<" saying critical"<<std::endl;
-			log::lock(wl)<<lin::alert<<"This is "<<name<<" saying alert"<<std::endl;
-			log::lock(wl)<<lin::emergency<<"This is "<<name<<" saying emergency"<<std::endl;
+			log::lock(wl, lin::debug)<<"This is "<<name<<" saying debug"<<std::endl;
+			log::lock(wl, lin::info)<<"This is "<<name<<" saying info"<<std::endl;
+			log::lock(wl, lin::notice)<<"This is "<<name<<" saying notice"<<std::endl;
+			log::lock(wl, lin::warning)<<"This is "<<name<<" saying warning"<<std::endl;
+			log::lock(wl, lin::error)<<"This is "<<name<<" saying error"<<std::endl;
+			log::lock(wl, lin::critical)<<"This is "<<name<<" saying critical"<<std::endl;
+			log::lock(wl, lin::alert)<<"This is "<<name<<" saying alert"<<std::endl;
+			log::lock(wl, lin::emergency)<<"This is "<<name<<" saying emergency"<<std::endl;
 		}
 	}
 

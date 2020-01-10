@@ -1,18 +1,30 @@
 #include "locking_actions.h"
 
 #include <utility>
+#include "tools.h"
 
 using namespace log;
 
 locking_action log::lock(logger& _logger) {
 
 	locking_actions_mutex.lock();
-	return locking_action{_logger};	
+	//TODO: Should add the date...
+	//_logger<<ltime::default;
+	return locking_action{_logger};
+}
+
+locking_action log::lock(logger& _logger, lin _type) {
+
+	locking_actions_mutex.lock();
+//TODO: Should add the date too, right???
+	//_logger<<ltime::default;
+	_logger<<lin_to_tag(_type);
+	return locking_action{_logger};
 }
 
 locking_action::locking_action(logger& _logger)
-		:logger_instance{_logger} {
-		
+		:logger_instance(_logger) {
+
 }
 
 locking_action::~locking_action() {

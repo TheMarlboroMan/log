@@ -11,6 +11,7 @@ namespace log {
 class locking_action;
 //TODO: Document.
 locking_action lock(logger& _logger);
+locking_action lock(logger&, lin);
 
 //!Shared mutex for this part of the library...
 std::mutex locking_actions_mutex;
@@ -100,7 +101,7 @@ class locking_action {
 									locking_action(logger& _logger);
 									~locking_action();
 
-	//TODO: Document.			
+	//TODO: Document.
 	template<typename X>
 	logger&							operator<<(const X& _val) {
 		return logger_instance<<_val;
