@@ -35,6 +35,22 @@ class locking_action {
 		return *this;
 	}
 
+	//!Some magic for modifiers...
+	locking_action& operator<<(std::ostream& (*pf)(std::ostream&)) {
+		logger_instance<<pf;
+		return *this;
+	}
+
+	locking_action& operator<<(std::ios& (*pf)(std::ios&)) {
+		logger_instance<<pf;
+		return *this;
+	}
+
+	locking_action& operator<<(std::ios_base& (*pf)(std::ios_base&)) {
+		logger_instance<<pf;
+		return *this;
+	}
+
 	private:
 				locking_action(logger& _logger);
 

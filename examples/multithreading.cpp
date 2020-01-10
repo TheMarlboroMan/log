@@ -20,13 +20,13 @@ struct worker {
 
 		while(running) {
 
-			log::lock(wl, lin::debug)<<"This is "<<name<<" saying debug"<<std::endl;
-			log::lock(wl, lin::info)<<"This is "<<name<<" saying info"<<std::endl;
-			log::lock(wl, lin::notice)<<"This is "<<name<<" saying notice"<<std::endl;
-			log::lock(wl, lin::warning)<<"This is "<<name<<" saying warning"<<std::endl;
-			log::lock(wl, lin::error)<<"This is "<<name<<" saying error"<<std::endl;
-			log::lock(wl, lin::critical)<<"This is "<<name<<" saying critical"<<std::endl;
-			log::lock(wl, lin::alert)<<"This is "<<name<<" saying alert"<<std::endl;
+			log::lock(wl, lin::debug)<<"This is "<<name<<" saying debug\n";
+			log::lock(wl, lin::info)<<"This is "<<name<<" saying info\n";
+			log::lock(wl, lin::notice)<<"This is "<<name<<" saying notice\n";
+			log::lock(wl, lin::warning)<<"This is "<<name<<" saying warning\n";
+			log::lock(wl, lin::error)<<"This is "<<name<<" saying error\n";
+			log::lock(wl, lin::critical)<<"This is "<<name<<" saying critical\n";
+			log::lock(wl, lin::alert)<<"This is "<<name<<" saying alert\n";
 			log::lock(wl, lin::emergency)<<"This is "<<name<<" saying emergency"<<std::endl;
 		}
 	}
