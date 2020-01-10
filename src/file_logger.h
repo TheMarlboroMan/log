@@ -9,14 +9,8 @@
 
 namespace log {
 
-//TODO: All logs should be an implementation of basic_log: something with a
-//streamlike thing. The trick here is to be really clear about the whole
-//hierarchy and to know that maybe all we need is a template class...
 
 //!A basic log to file.
-
-//!The log allows for all log levels of input, but can be cut at any level to 
-//!produce smaller results.
 
 class file_logger
 	:public logger {
@@ -28,44 +22,16 @@ class file_logger
 	//!Class destructor. Adds a timestamp to the log file if possible (like deactivate).
 	~file_logger();
 
+	protected:
+
+	//!This begins the implementation of the base class.
 	virtual logger& operator<<(const char * _input) {return insert(_input);}
 	virtual logger& operator<<(int _input) {return insert(_input);}
 	virtual logger& operator<<(double _input) {return insert(_input);}
 	virtual logger& operator<<(const std::string& _input) {return insert(_input);}
-	
-	//!Inserts data into the log. This is the interesting part, actually, the 
-	//!one that allows us to use a fluent interface.
-/* 	template <class X> 
-
-	logger& operator<<(const X &input) {
-
-		if(check_levels()) {
-			s<<input;
-			s.flush();
-		}
-		return *this;
-	}
-*/
-
-	//!See the lin enum class for all possible input values.
-	logger& operator<<(lin);
-
-	//!Sets the minimum level for the log to write data.
-	//!Error will show only errors, warning will show errors and warnings, etc.
-	logger& operator<<(lcut);
-
-	//!Adds the time, date or both to the output.
-	//!See the ltime enum class for all possible input values.
-	logger& operator<<(ltime);
-
-	//!Accepts std::ostream modifiers.
-	logger& operator<<(std::ostream& ( *pf )(std::ostream&));
-
-	//!Accepts std::ios modifiers.
-	logger& operator<<(std::ios& ( *pf )(std::ios&));
-
-	//!Accepts std::ios_base modifiers.
-	logger& operator<<(std::ios_base& ( *pf )(std::ios_base&));
+	virtual logger& operator<<(std::ostream& ( *pf )(std::ostream&)) {return insert(pf);}
+	virtual logger& operator<<(std::ios& ( *pf )(std::ios&)) {return insert(pf);}
+	virtual logger& operator<<(std::ios_base& ( *pf )(std::ios_base&)) {return insert(pf);}
 
 	private:
 

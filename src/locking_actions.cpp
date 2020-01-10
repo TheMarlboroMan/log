@@ -5,20 +5,21 @@
 
 using namespace log;
 
-locking_action log::lock(logger& _logger) {
-
-	locking_actions_mutex.lock();
-	//TODO: Should add the date...
-	//_logger<<ltime::default;
-	return locking_action{_logger};
-}
-
 locking_action log::lock(logger& _logger, lin _type) {
 
 	locking_actions_mutex.lock();
-//TODO: Should add the date too, right???
-	//_logger<<ltime::default;
-	_logger<<lin_to_tag(_type);
+	//Add the time and tag...
+	switch(_type) {
+		case lin::emergency: _logger.emergency(); break;
+		case lin::alert:     _logger.alert(); break;
+		case lin::critical:  _logger.critical(); break;
+		case lin::error:     _logger.error(); break;
+		case lin::warning:   _logger.warning(); break;
+		case lin::notice:    _logger.notice(); break;
+		case lin::info:      _logger.info(); break;
+		case lin::debug:     _logger.debug(); break;
+	}
+
 	return locking_action{_logger};
 }
 
@@ -31,63 +32,3 @@ locking_action::~locking_action() {
 
 	locking_actions_mutex.unlock();
 }
-
-/*
-logger& log::emergency(logger& _l) {
-
-	return quick_log(_l, lin::emergency);
-}
-
-logger& log::alert(logger& _l) {
-
-	return quick_log(_l, lin::alert);
-}
-
-logger& log::critical(logger& _l) {
-
-	return quick_log(_l, lin::critical);
-}
-
-logger& log::error(logger& _l) {
-
-	return quick_log(_l, lin::error);
-}
-
-logger& log::warning(logger& _l) {
-
-	return quick_log(_l, lin::warning);
-}
-
-logger& log::notice(logger& _l) {
-
-	return quick_log(_l, lin::notice);
-}
-
-logger& log::info(logger& _l) {
-
-	return quick_log(_l, lin::info);
-}
-
-logger& log::debug(logger& _l) {
-
-	return quick_log(_l, lin::debug);
-}
-
-logger& log::quick_log(logger& _l, lin _lin) {
-
-	_l<<llock{};
-	ltagout tstatus=_l.tag_status;
-	_l<<ltagout::silent<<_lin;
-//TODO: We'll see... 
-//	if(_l.check_levels()) {
-		_l<<tstatus<<ltime::datetime<<_lin;
-//	}
-
-	return _l<<tstatus;
-}
-
-lunlocknl log::endl() {
-
-	return lunlocknl{};
-}
-*/
