@@ -11,8 +11,9 @@ namespace log {
 
 
 //!A basic log to file.
-//TODO If we manage to implement a ostream logger, this one could be defined
-//in terms of it
+//TODO: implement this in terms of stream_logger, which implies some changes to
+//the stream logger thing, specifically the ability to build it WITHOUT 
+//a stream!!!!!!.
 class file_logger
 	:public logger {
 	public:
