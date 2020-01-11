@@ -6,5 +6,5 @@
 
 namespace log {
 
-int lin_to_int(lin);
+int lvl_to_int(lvl);
 }

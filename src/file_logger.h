@@ -38,21 +38,13 @@ class file_logger
 	template<typename T>	
 	logger&						insert(const T& _value) {
 
-		if(check_levels()) {
-			s<<_value;
-			s.flush();
-		}
+		s<<_value;
+		s.flush();
 		return *this;
 	}
 
-	//!Checks if the current level can write.
-	bool					check_levels() const {return entry_level & allowed_levels;}
-	bool					check_levels(int _lvl) const {return _lvl & allowed_levels;}
-
 	std::string				filename;
 	std::ofstream 			s;		//!< Internal output file stream.
-	int 					entry_level=levels::all,	//!< Current log level.
-							allowed_levels=levels::all;	//!< Current levels to warrant logging.	
 };
 
 }

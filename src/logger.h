@@ -9,65 +9,69 @@
 
 namespace log {
 
-class locking_action;
+class locking_sentry;
+class sentry;
 
-//TODO: Document. It is NOT REALLY an interface, as it includes the format things.
+//!Base class for all loggers. Defines a few methods common to all loggers
+//!and the signatures for the logging methods proper.
 class logger {
 
 	public:
 
-	//!Sets the tag format function, which must take a log::lin and return
-	//!a std::string.
-	logger& set_tag_format(std::function<std::string(const lin)> _func) {
+	//!Sets the tag format function, which must take a log::lvl and return
+	//!a std::string. The function will be used each time a tag is printed
+	//!to the log. Tags are "warning", "log", "critical", "debug" and so
+	//!on.
+	logger& set_tag_format(std::function<std::string(const lvl)> _func) {
 	
 		format_tag=_func;
 		return *this;
 	}
 
 	//!Sets the time format function, which must take a pointer to a std::tm
-	//!structure and return a std::string. 
+	//!structure and return a std::string. The function will be used each
+	//!time the log::now struct is sent into a logger, which is automatic
+	//!when using the sentries (such as locking_sentry).
 	logger& set_time_format(std::function<std::string(std::tm*)> _func) {
 		
 		format_time=_func;
 		return *this;
 	}
 
+	//!Substitutes the current mask value for the one given. The mask value
+	//!indicates which levels will be actually printed to the underlying
+	//!log system.	
+	logger& operator<<(mask);
+
 	protected:
 
-	//!All insertion operators are protected so that only the actions
-	//!such as locking_action can access them.
-	//TODO: Likely bullshit.
-	logger& emergency() 	{return (*this)<<ltime{}<<" "<<lin::emergency;}
-	logger& alert() 	{return (*this)<<ltime{}<<" "<<lin::alert;}
-	logger& critical() 	{return (*this)<<ltime{}<<" "<<lin::critical;}
-	logger& error() 	{return (*this)<<ltime{}<<" "<<lin::error;}
-	logger& warning() 	{return (*this)<<ltime{}<<" "<<lin::warning;}
-	logger& notice() 	{return (*this)<<ltime{}<<" "<<lin::notice;}
-	logger& info() 		{return (*this)<<ltime{}<<" "<<lin::info;}
-	logger& debug() 	{return (*this)<<ltime{}<<" "<<lin::debug;}
-
-	//!Insertion operator for a ltime, which will format the current
+	//!All insertion operators are protected so that only the sentries 
+	//!access them.
+	
+	//!Insertion operator for a log::now, which will format the current
 	//!time according to the time format property of this class. A default
 	//!function is provided.
-	logger& operator<<(ltime);
+	logger& operator<<(log::now);
 
-	//!Insertion operator for a lin, which will format the passed tag
+	//!Insertion operator for a lvl, which will format the passed tag
 	//!using the tag format property of this class. A default function
 	//!is provided.
-	logger& operator<<(lin _lin);
- 
-	//TODO: Perhaps a better way of doing this would be just to mask the data
-	//and have each operator in this class call a protected virtual function
-	//that does the work...
-	//!This is the operator for the cut level. 
-	//TODO: Obviously, this motherfucker cannot be =0...
-	//logger& operator<<(lcut)=0;
+	logger& operator<<(lvl);
 
 	//!Stored function to format the tag name.
-	std::function<std::string(const lin)>		format_tag;
+	std::function<std::string(const lvl)>		format_tag;
 
 	//!Stored function to format the time.
 	std::function<std::string(std::tm*)>		format_time;
+	
+	//!Level mask. When a message chain comes through, its level is checked
+	//!against the mask and only comes through it the level value can be 
+	//!and'ed with the mask.
+	int level_mask=levels::all;
+
+	//!Saves the state of the level mask against the current message chain
+	//!so that the sentries can check if they must print or not.
+	bool level_mask_ok=true;
 
 	//!These are the regular insertion operators for printable types. Each
 	//!derived class must specify the way in which data is managed.
@@ -85,12 +89,14 @@ class logger {
 	//!Accepts ios_base modifiers.
 	virtual logger& operator<<(std::ios_base& ( *pf )(std::ios_base&))=0;	
 
-	//!Allows locking_action to access the internals of this class.
-	friend class locking_action;
+	//!Allows sentries to access the internals of this class.
+	friend class locking_sentry;
+	friend class sentry;
 
-	//!Allows the function that builds locking actions to access the 
+	//!Allows the function that build sentries to access the 
 	//!internals of this class.
-	friend locking_action lock(logger&, lin);
+	friend locking_sentry lock(logger&, lvl);
+	friend sentry log(logger&, lvl);
 };
 
 }

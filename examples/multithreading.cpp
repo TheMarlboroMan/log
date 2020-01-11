@@ -1,5 +1,9 @@
+//This example will use a file_logger: a log that writes to a file.
 #include "../src/file_logger.h"
-#include "../src/locking_actions.h"
+
+//In the example we will use locking sentries to use multiple threads writing
+//to the same logger.
+#include "../src/sentry.h"
 
 #include <thread>
 #include <string>
@@ -7,8 +11,13 @@
 #include <chrono>
 
 using namespace log;
+//Initialise the file logger. This will open the file.
 file_logger wl("testlog.log");
 
+//For this example we will have N workers. Each worker will log for about two
+//seconds without their data becoming corrupted or intertwined. The main thread
+//will keep time and set the "running" flag to false, at which moment the 
+//workers will stop logging when all messages in "work()" are issued.
 struct worker {
 
 						worker(const std::string& _n, bool& _r):
@@ -20,18 +29,22 @@ struct worker {
 
 		while(running) {
 
-			log::lock(wl, lin::debug)<<"This is "<<name<<" saying debug\n";
-			log::lock(wl, lin::info)<<"This is "<<name<<" saying info\n";
-			log::lock(wl, lin::notice)<<"This is "<<name<<" saying notice\n";
-			log::lock(wl, lin::warning)<<"This is "<<name<<" saying warning\n";
-			log::lock(wl, lin::error)<<"This is "<<name<<" saying error\n";
-			log::lock(wl, lin::critical)<<"This is "<<name<<" saying critical\n";
-			log::lock(wl, lin::alert)<<"This is "<<name<<" saying alert\n";
-			log::lock(wl, lin::emergency)<<"This is "<<name<<" saying emergency"<<std::endl;
+//log::lock receives a logger and a level. Once called, a "chain" is started. 
+//The chain is used with the insertion operator and ends with the semicolon. As
+//long as the chain has not ended, no other log::lock calls will write to the
+//logger.
+			log::lock(wl, lvl::debug)<<"This is "<<name<<" saying debug\n";
+			log::lock(wl, lvl::info)<<"This is "<<name<<" saying info\n";
+			log::lock(wl, lvl::notice)<<"This is "<<name<<" saying notice\n";
+			log::lock(wl, lvl::warning)<<"This is "<<name<<" saying warning\n";
+			log::lock(wl, lvl::error)<<"This is "<<name<<" saying error\n";
+			log::lock(wl, lvl::critical)<<"This is "<<name<<" saying critical\n";
+			log::lock(wl, lvl::alert)<<"This is "<<name<<" saying alert\n";
+			log::lock(wl, lvl::emergency)<<"This is "<<name<<" saying emergency"<<std::endl;
 		}
 	}
 
-	bool&				running;
+	const bool&				running;
 	std::string			name;
 };
 
@@ -39,6 +52,7 @@ int main(int, char **) {
 
 	bool running=true;
 
+	//Create all workers.
 	std::vector<worker> workers{
 		{"worker 1", running},
 		{"worker 2", running},
@@ -51,18 +65,20 @@ int main(int, char **) {
 		{"worker 9", running}
 	};
 
-
-//TODO:
-//	info(wl)<<"Fun will start ..."<<endl();
+	//!This is written without locks...
+	log::log(wl, lvl::info)<<"starting example"<<std::endl;
+	
 	std::vector<std::thread> threads;
-
+	//Call "work" in each worker, so they start logging.
 	for(auto& w : workers) {
 		threads.push_back(std::thread(&worker::work, std::ref(w)));
 	}
 
+	//Sleep and top the work.
 	std::this_thread::sleep_for(std::chrono::seconds(2));
 	running=false;
 
+	//Wait for all workers to end.
 	for(auto& t : threads) {
 		t.join();
 	}

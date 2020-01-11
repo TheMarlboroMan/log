@@ -2,8 +2,8 @@ set(SOURCE
    ${SOURCE}
    ${CMAKE_CURRENT_SOURCE_DIR}/logger.cpp
    ${CMAKE_CURRENT_SOURCE_DIR}/logger.h
-   ${CMAKE_CURRENT_SOURCE_DIR}/locking_actions.cpp
-   ${CMAKE_CURRENT_SOURCE_DIR}/locking_actions.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/sentry.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/sentry.h
    ${CMAKE_CURRENT_SOURCE_DIR}/file_logger.cpp
    ${CMAKE_CURRENT_SOURCE_DIR}/file_logger.h
    ${CMAKE_CURRENT_SOURCE_DIR}/tools.cpp
