@@ -25,8 +25,6 @@ std::mutex locking_sentry_mutex;
 //!The locking sentry acts a log proxy that guarantees that a chain of insertion
 //!operators will happen sequentially in the log thread, without other calls to
 //!the same logger interfering.
-//TODO: This should be "locking_sentry".
-//TODO: There should be a "non_locking_sentry"
 class locking_sentry{
 
 	public:

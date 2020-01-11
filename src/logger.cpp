@@ -1,11 +1,15 @@
 #include "logger.h"
 
+#include <stdexcept>
+
 using namespace log;
 
 logger& logger::set_mask(int _mask) {
 
-	//TODO: We should actually check that the value is valid, that
-	//is, it is not levels::none and it is not larger than levels::all
+	if(levels::none==_mask || _mask > levels::all) {
+		throw std::runtime_error("invalid mask value to logger::set_mask");
+	}
+
 	level_mask=_mask;
 	return *this;
 }
@@ -57,10 +61,6 @@ logger& logger::operator<<(lvl _lvl) {
 		};
 	}
 
-//TODO: Perhaps we should check the level here. If the level does not match
-//the mask we could return false. The sentries could use that result to return
-//a null sentry, which would just do nothing. Easier would be to have a 
-//level_allowed boolean, set it here, use it in the sentries. Go to hell.	
 	return (*this)<<format_tag(_lvl);
 }
 
