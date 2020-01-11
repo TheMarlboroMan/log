@@ -41,8 +41,10 @@ class logger {
 	//!Substitutes the current mask value for the one given. The mask value
 	//!indicates which levels will be actually printed to the underlying
 	//!log system.	
-	logger& operator<<(mask);
+	logger& set_mask(int);
 
+	//!Returns the current mask value.
+	int get_mask() const {return level_mask;}
 	protected:
 
 	//!All insertion operators are protected so that only the sentries 

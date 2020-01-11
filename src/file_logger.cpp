@@ -9,8 +9,3 @@ file_logger::file_logger(const char * _filename)
 	s{filename} {
 	
 }
-
-file_logger::~file_logger() {
-
-	s.close();
-}

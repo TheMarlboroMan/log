@@ -2,11 +2,12 @@
 
 using namespace log;
 
-logger& logger::operator<<(mask _mask) {
+logger& logger::set_mask(int _mask) {
 
 	//TODO: We should actually check that the value is valid, that
 	//is, it is not levels::none and it is not larger than levels::all
-	level_mask=_mask.value;
+	level_mask=_mask;
+	return *this;
 }
 
 logger& logger::operator<<(log::now) {
