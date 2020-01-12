@@ -12,7 +12,6 @@ class sentry;
 
 //!Starts the locking chain with the given logger and a level. No other thread
 //!will be able to call "lock" until this chain is done.
-//TODO: I don't like the "lock" name.
 locking_sentry lock(logger&, lvl);
 
 //!Starts a log chain that will not lock the logger.
