@@ -6,7 +6,11 @@ The log allows for the usual levels of input, but can be cut at any level to
 produce smaller files. It also has locking capabilities for multithreading and 
 date/time formats.
 
-# How does it work:
+# What are all these branches?
+
+Ignore them all. Just use master, really. Classic was supposed to be the one that was in the old libdansdl2, not-so-classic was supposed to be an intermediate state and master is supposed to be a refactor. Just go with master.
+
+# How does it work?
 
 - Choose the kind of log you want to use (to an output stream, nowhere, 
   to file...).
