@@ -27,4 +27,8 @@ install(DIRECTORY src/ DESTINATION install/include/log FILES_MATCHING PATTERN "*
 if(${BUILD_EXAMPLES})
 	add_executable(multithreading examples/multithreading.cpp)
 	target_link_libraries(multithreading log pthread)
+	add_executable(mask examples/mask.cpp)
+	target_link_libraries(mask log)
+	add_executable(example examples/example.cpp)
+	target_link_libraries(example log)
 endif()

@@ -1,14 +1,16 @@
 #include "file_logger.h"
 
-#include "exception.h"
+#include <stdexcept>
 
 using namespace log;
 
-file_logger::file_logger(const std::string& _filename)
-	:file{_filename.c_str()}, internal_stream(file) {
-
-	if(!file) {
-		throw exception(
+file_logger::file_logger(const char * _filename)
+	:filename{_filename}, 
+	s{filename} {
+	
+	if(!s) {
+		//TODO THe library should throw its own exceptions
+		throw std::runtime_error(
 			std::string("could not open log file ")
 			+_filename
 		);

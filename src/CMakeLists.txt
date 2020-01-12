@@ -1,16 +1,16 @@
 set(SOURCE
-	${SOURCE}
-	${CMAKE_CURRENT_SOURCE_DIR}/backend_stream.h
-	${CMAKE_CURRENT_SOURCE_DIR}/backend_stream.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/base_log.h
-	${CMAKE_CURRENT_SOURCE_DIR}/base_log.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/file_logger.h
-	${CMAKE_CURRENT_SOURCE_DIR}/file_logger.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/mute_logger.h
-	${CMAKE_CURRENT_SOURCE_DIR}/mute_logger.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/sentry.h
-	${CMAKE_CURRENT_SOURCE_DIR}/sentry.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/tools.h
-	${CMAKE_CURRENT_SOURCE_DIR}/tools.cpp
-	PARENT_SCOPE
+   ${SOURCE}
+   ${CMAKE_CURRENT_SOURCE_DIR}/logger.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/logger.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/sentry.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/sentry.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/file_logger.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/file_logger.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/void_logger.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/void_logger.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/ostream_logger.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/ostream_logger.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/tools.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/tools.h
+   PARENT_SCOPE
 )

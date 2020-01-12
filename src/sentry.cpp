@@ -1,44 +1,32 @@
 #include "sentry.h"
 
-#include <cassert>
-#include "tools.h"
-#include "base_log.h"
-
 using namespace log;
 
-sentry::sentry(base_log& _log, lin _input_level):
-	log{_log} {
+locking_sentry log::lock(logger& _logger, lvl _type) {
 
-	(*this)<<date()<<" "<<time()<<" "<<lin_to_tag(_input_level)<<" ";
+	locking_sentry_mutex.lock();
+	_logger<<log::now()<<" "<<_type<<" ";
+	return locking_sentry{_logger};
 }
 
-sentry::sentry(const sentry& _other):
-	log{_other.log} {
+sentry log::log(logger& _logger, lvl _type) {
 
-	//!Intentionally make the program explode. We are not supposed to copy these
-	//!around
-	assert(false);
+	_logger<<log::now()<<" "<<_type<<" ";
+	return sentry{_logger};
 }
 
-sentry::~sentry() {
 
-	log.commit(buffer.str());
+locking_sentry::locking_sentry(logger& _logger)
+		:logger_instance(_logger) {
+
 }
 
-sentry& sentry::operator<<(std::ostream& ( *pf )(std::ostream&)) {
+locking_sentry::~locking_sentry() {
 
-	buffer<<pf;
-	return *this;
+	locking_sentry_mutex.unlock();
 }
 
-sentry& sentry::operator<<(std::ios& ( *pf )(std::ios&)) {
-
-	buffer<<pf;
-	return *this;
-}
-
-sentry& sentry::operator<<(std::ios_base& ( *pf )(std::ios_base&)) {
-
-	buffer<<pf;
-	return *this;
+sentry::sentry(logger& _logger)
+	:logger_instance(_logger) {
+	
 }

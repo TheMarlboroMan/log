@@ -1,22 +1,22 @@
 #pragma once
 
-#include <fstream>
+#include <ostream>
+#include <string>
+#include <sstream>
 
 #include "logger.h"
 
 namespace log {
 
-//!A basic log to file.
-//TODO: implement this in terms of stream_logger, which implies some changes to
-//the stream logger thing, specifically the ability to build it WITHOUT 
-//a stream!!!!!!.
-class file_logger
+
+//!A log to an output stream.
+class ostream_logger
 	:public logger {
 	public:
 	
 	//!Class constructor, creates an active log, with a file assigned and opened.
-	file_logger(const char * filename);
-
+	ostream_logger(std::ostream&);
+	
 	protected:
 
 	//!This begins the implementation of the base class.
@@ -38,8 +38,7 @@ class file_logger
 		return *this;
 	}
 
-	std::string				filename;
-	std::ofstream 			s;		//!< Internal output file stream.
+	std::ostream& 			s; //!<Internal output stream.
 };
 
 }

@@ -10,3 +10,5 @@ makefile
 makefile_linux
 build
 .vscode
+*.swp
+*~

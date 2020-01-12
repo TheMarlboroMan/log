@@ -1,5 +1,4 @@
-#ifndef LOG_TOOLS_H
-#define LOG_TOOLS_H
+#pragma once
 
 #include "definitions.h"
 
@@ -7,15 +6,5 @@
 
 namespace log {
 
-int lin_to_int(lin);
-
-//!Creates a string with the system date.
-std::string	date();
-
-//!Creates a string with the system time.
-std::string time();
-
-const char * lin_to_tag(lin);
+int lvl_to_int(lvl);
 }
-
-#endif
