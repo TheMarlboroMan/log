@@ -1,10 +1,10 @@
 #pragma once
 
+#include "logger.h"
+
 #include <ostream>
 #include <string>
 #include <sstream>
-
-#include "logger.h"
 
 namespace log {
 

@@ -1,9 +1,8 @@
 #pragma once
 
-#include <fstream>
-
 #include "logger.h"
 
+#include <fstream>
 namespace log {
 
 //!A basic log to file.

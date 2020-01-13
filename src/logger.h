@@ -1,11 +1,11 @@
 #pragma once
 
+#include "definitions.h"
+#include "tools.h"
+
 #include <functional>
 #include <ctime>
 #include <cstring>
-
-#include "definitions.h"
-#include "tools.h"
 
 namespace log {
 

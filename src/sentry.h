@@ -1,9 +1,9 @@
 #pragma once
+#include "logger.h"
+
+#include "definitions.h"
 
 #include <mutex>
-
-#include "logger.h"
-#include "definitions.h"
 
 namespace log {
 
