@@ -1,17 +1,17 @@
 #include "sentry.h"
 
-using namespace log;
+using namespace lm;
 
-locking_sentry log::lock(logger& _logger, lvl _type) {
+locking_sentry lm::lock(logger& _logger, lvl _type) {
 
 	locking_sentry_mutex.lock();
-	_logger<<log::now()<<" "<<_type<<" ";
+	_logger<<lm::now()<<" "<<_type<<" ";
 	return locking_sentry{_logger};
 }
 
-sentry log::log(logger& _logger, lvl _type) {
+sentry lm::log(logger& _logger, lvl _type) {
 
-	_logger<<log::now()<<" "<<_type<<" ";
+	_logger<<lm::now()<<" "<<_type<<" ";
 	return sentry{_logger};
 }
 

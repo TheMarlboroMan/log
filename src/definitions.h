@@ -1,6 +1,6 @@
 #pragma once
 
-namespace log {
+namespace lm {
 
 //!Log levels, from the most critical to the least.
 enum class lvl{emergency, alert, critical, error, warning, notice, info, debug};

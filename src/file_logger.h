@@ -3,7 +3,7 @@
 #include "logger.h"
 
 #include <fstream>
-namespace log {
+namespace lm {
 
 //!A basic log to file.
 //TODO: implement this in terms of stream_logger, which implies some changes to

@@ -7,7 +7,7 @@
 #include <ctime>
 #include <cstring>
 
-namespace log {
+namespace lm {
 
 class locking_sentry;
 class sentry;
@@ -50,10 +50,10 @@ class logger {
 	//!All insertion operators are protected so that only the sentries 
 	//!access them.
 	
-	//!Insertion operator for a log::now, which will format the current
+	//!Insertion operator for a lm::now, which will format the current
 	//!time according to the time format property of this class. A default
 	//!function is provided.
-	logger& operator<<(log::now);
+	logger& operator<<(lm::now);
 
 	//!Insertion operator for a lvl, which will format the passed tag
 	//!using the tag format property of this class. A default function

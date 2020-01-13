@@ -2,7 +2,7 @@
 
 #include "logger.h"
 
-namespace log {
+namespace lm {
 
 //!A logger that does nothing and whose purpose is to exist in production 
 //!applications without removing log code, as questionable as that might be.

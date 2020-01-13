@@ -6,7 +6,7 @@
 #include <string>
 #include <sstream>
 
-namespace log {
+namespace lm {
 
 
 //!A log to an output stream.

@@ -1,8 +1,8 @@
 #include "tools.h"
 
-using namespace log;
+using namespace lm;
 
-int log::lvl_to_int(lvl _lin) {
+int lm::lvl_to_int(lvl _lin) {
 
 	switch(_lin) {
 		case lvl::emergency: return levels::emergency;

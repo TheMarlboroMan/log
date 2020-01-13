@@ -6,8 +6,6 @@ set(SOURCE
    ${CMAKE_CURRENT_SOURCE_DIR}/sentry.h
    ${CMAKE_CURRENT_SOURCE_DIR}/file_logger.cpp
    ${CMAKE_CURRENT_SOURCE_DIR}/file_logger.h
-   ${CMAKE_CURRENT_SOURCE_DIR}/void_logger.cpp
-   ${CMAKE_CURRENT_SOURCE_DIR}/void_logger.h
    ${CMAKE_CURRENT_SOURCE_DIR}/ostream_logger.cpp
    ${CMAKE_CURRENT_SOURCE_DIR}/ostream_logger.h
    ${CMAKE_CURRENT_SOURCE_DIR}/tools.cpp

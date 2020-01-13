@@ -2,7 +2,7 @@
 
 #include "definitions.h"
 
-namespace log {
+namespace lm {
 
 int lvl_to_int(lvl);
 }

@@ -5,7 +5,7 @@
 
 #include <mutex>
 
-namespace log {
+namespace lm {
 
 class locking_sentry;
 class sentry;

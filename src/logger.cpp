@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-using namespace log;
+using namespace lm;
 
 logger& logger::set_mask(int _mask) {
 
@@ -14,7 +14,7 @@ logger& logger::set_mask(int _mask) {
 	return *this;
 }
 
-logger& logger::operator<<(log::now) {
+logger& logger::operator<<(lm::now) {
 
 	if(!level_mask_ok) {
 		return *this;

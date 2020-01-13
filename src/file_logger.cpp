@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-using namespace log;
+using namespace lm;
 
 file_logger::file_logger(const char * _filename)
 	:filename{_filename}, 
