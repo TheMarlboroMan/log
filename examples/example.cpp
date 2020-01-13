@@ -11,6 +11,7 @@
 void show_menu();
 int get_option();
 void log_data(lm::logger&);
+void test_types(lm::logger&);
 
 int main(int, char **) {
 
@@ -19,6 +20,7 @@ int main(int, char **) {
 	lm::void_logger vl;
 	lm::ostream_logger ol(std::cout);
 
+	test_types(ol);
 	//Now ask the user for a log to use and a message...
 	while(true){
 		show_menu();
@@ -61,4 +63,29 @@ void log_data(lm::logger& _logger) {
 	std::string msg;
 	std::getline(std::cin, msg);
 	lm::log(_logger, lm::lvl::info)<<msg<<std::endl;
+}
+
+void test_types(lm::logger& _logger) {
+
+	int intval=-1;
+	unsigned int unsignedintval=1;
+	long longval=-1;
+	unsigned long unsignedlongval=1;
+	double doubleval=3.3;
+	float floatval=3.5f;
+	const char * cstrval="Hello";
+	char charval='a';
+	std::string strval{"There"};
+
+	lm::log(_logger, lm::lvl::info)<<"Testing output of types..."<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"int: "<<intval<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"unsigned int: "<<unsignedintval<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"long: "<<longval<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"unsigned long: "<<unsignedlongval<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"double: "<<doubleval<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"float: "<<floatval<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"const char *: "<<cstrval<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"char: "<<charval<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"std::string: "<<strval<<std::endl;
+
 }

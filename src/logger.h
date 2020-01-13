@@ -78,7 +78,11 @@ class logger {
 	//!These are the regular insertion operators for printable types. Each
 	//!derived class must specify the way in which data is managed.
 	virtual logger& operator<<(const char *)=0;
+	virtual logger& operator<<(char)=0;
 	virtual logger& operator<<(int)=0;
+	virtual logger& operator<<(unsigned int)=0;
+	virtual logger& operator<<(long int)=0;
+	virtual logger& operator<<(unsigned long int)=0;
 	virtual logger& operator<<(double)=0;
 	virtual logger& operator<<(const std::string&)=0;
 
