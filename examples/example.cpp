@@ -10,14 +10,14 @@
 //way.
 void show_menu();
 int get_option();
-void log_data(log::logger&);
+void log_data(lm::logger&);
 
 int main(int, char **) {
 
 	//First, let us instance a logger of each kind.
-	log::file_logger fl("example.log");
-	log::void_logger vl;
-	log::ostream_logger ol(std::cout);
+	lm::file_logger fl("example.log");
+	lm::void_logger vl;
+	lm::ostream_logger ol(std::cout);
 
 	//Now ask the user for a log to use and a message...
 	while(true){
@@ -55,10 +55,10 @@ int get_option() {
 	return result;
 }
 
-void log_data(log::logger& _logger) {
+void log_data(lm::logger& _logger) {
 
 	std::cout<<"Enter message: >>";
 	std::string msg;
 	std::getline(std::cin, msg);
-	log::log(_logger, log::lvl::info)<<msg<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<msg<<std::endl;
 }

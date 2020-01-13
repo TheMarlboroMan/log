@@ -8,14 +8,14 @@
 #include <vector>
 #include <cmath>
 
-using namespace log;
+using namespace lm;
 
-void say_something(log::logger& _logger);
+void say_something(lm::logger& _logger);
 
 int main(int, char **) {
 
 	std::cout<<"Building a ostream logger from std::cout..."<<std::endl;
-	log::ostream_logger ol(std::cout);
+	lm::ostream_logger ol(std::cout);
 
 	std::cout<<"Current mask value :"<<ol.get_mask()<<std::endl;
 
@@ -24,9 +24,9 @@ int main(int, char **) {
 
 	//Masking some levels...
 	std::cout<<"We will mask out error and info now..."<<std::endl;
-	int mask_value=log::levels::all;
-	mask_value&=~log::levels::error;
-	mask_value&=~log::levels::info;
+	int mask_value=lm::levels::all;
+	mask_value&=~lm::levels::error;
+	mask_value&=~lm::levels::info;
 	ol.set_mask(mask_value);
 	//TODO: There's a bug here: a couple of spaces are inserted...
 	std::cout<<"Current mask value :"<<ol.get_mask()<<std::endl;
@@ -35,14 +35,14 @@ int main(int, char **) {
 	return 0;
 }
 
-void say_something(log::logger& _logger) {
+void say_something(lm::logger& _logger) {
 
-	log::log(_logger, log::lvl::emergency)<<"State of emergency!"<<std::endl;
-	log::log(_logger, log::lvl::alert)<<"This is an alert"<<std::endl;
-	log::log(_logger, log::lvl::critical)<<"This is a critical entry"<<std::endl;
-	log::log(_logger, log::lvl::error)<<"This is an error"<<std::endl;
-	log::log(_logger, log::lvl::warning)<<"This is merely a warning"<<std::endl;
-	log::log(_logger, log::lvl::notice)<<"This is just a notice..."<<std::endl;
-	log::log(_logger, log::lvl::info)<<"Some info here..."<<std::endl;
-	log::log(_logger, log::lvl::debug)<<"And debug"<<std::endl;
+	lm::log(_logger, lm::lvl::emergency)<<"State of emergency!"<<std::endl;
+	lm::log(_logger, lm::lvl::alert)<<"This is an alert"<<std::endl;
+	lm::log(_logger, lm::lvl::critical)<<"This is a critical entry"<<std::endl;
+	lm::log(_logger, lm::lvl::error)<<"This is an error"<<std::endl;
+	lm::log(_logger, lm::lvl::warning)<<"This is merely a warning"<<std::endl;
+	lm::log(_logger, lm::lvl::notice)<<"This is just a notice..."<<std::endl;
+	lm::log(_logger, lm::lvl::info)<<"Some info here..."<<std::endl;
+	lm::log(_logger, lm::lvl::debug)<<"And debug"<<std::endl;
 }

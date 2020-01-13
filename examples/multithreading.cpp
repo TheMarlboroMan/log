@@ -10,7 +10,7 @@
 #include <vector>
 #include <chrono>
 
-using namespace log;
+using namespace lm;
 //Initialise the file logger. This will open the file.
 file_logger wl("testlog.log");
 
@@ -29,18 +29,18 @@ struct worker {
 
 		while(running) {
 
-//log::lock receives a logger and a level. Once called, a "chain" is started. 
+//lm::lock receives a logger and a level. Once called, a "chain" is started. 
 //The chain is used with the insertion operator and ends with the semicolon. As
-//long as the chain has not ended, no other log::lock calls will write to the
+//long as the chain has not ended, no other lm::lock calls will write to the
 //logger.
-			log::lock(wl, lvl::debug)<<"This is "<<name<<" saying debug\n";
-			log::lock(wl, lvl::info)<<"This is "<<name<<" saying info\n";
-			log::lock(wl, lvl::notice)<<"This is "<<name<<" saying notice\n";
-			log::lock(wl, lvl::warning)<<"This is "<<name<<" saying warning\n";
-			log::lock(wl, lvl::error)<<"This is "<<name<<" saying error\n";
-			log::lock(wl, lvl::critical)<<"This is "<<name<<" saying critical\n";
-			log::lock(wl, lvl::alert)<<"This is "<<name<<" saying alert\n";
-			log::lock(wl, lvl::emergency)<<"This is "<<name<<" saying emergency"<<std::endl;
+			lm::lock(wl, lvl::debug)<<"This is "<<name<<" saying debug\n";
+			lm::lock(wl, lvl::info)<<"This is "<<name<<" saying info\n";
+			lm::lock(wl, lvl::notice)<<"This is "<<name<<" saying notice\n";
+			lm::lock(wl, lvl::warning)<<"This is "<<name<<" saying warning\n";
+			lm::lock(wl, lvl::error)<<"This is "<<name<<" saying error\n";
+			lm::lock(wl, lvl::critical)<<"This is "<<name<<" saying critical\n";
+			lm::lock(wl, lvl::alert)<<"This is "<<name<<" saying alert\n";
+			lm::lock(wl, lvl::emergency)<<"This is "<<name<<" saying emergency"<<std::endl;
 		}
 	}
 
@@ -51,7 +51,7 @@ struct worker {
 
 int main(int, char **) {
 
-	log::file_logger fl("testlog.log");
+	lm::file_logger fl("testlog.log");
 
 	bool running=true;
 
@@ -69,7 +69,7 @@ int main(int, char **) {
 	};
 
 	//!This is written without locks...
-	log::log(fl, lvl::info)<<"starting example"<<std::endl;
+	lm::log(fl, lvl::info)<<"starting example"<<std::endl;
 	
 	std::vector<std::thread> threads;
 	//Call "work" in each worker, so they start logging.
