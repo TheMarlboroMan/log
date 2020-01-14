@@ -11,11 +11,11 @@ option(BUILD_STATIC "By default, a shared library is built. Set to on to switch 
 option(BUILD_EXAMPLES "Build example code" ON)
 
 #Add the include directory.
-include_directories("include");
+include_directories("include")
 
 #Adding sources...
 set(SOURCE "")
-add_subdirectory("${PROJECT_SOURCE_DIR}/src")
+add_subdirectory("${PROJECT_SOURCE_DIR}/lib")
 
 #Library building and installation.
 if(${BUILD_STATIC})
