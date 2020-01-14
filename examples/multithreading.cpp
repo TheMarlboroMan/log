@@ -1,9 +1,9 @@
 //This example will use a file_logger: a log that writes to a file.
-#include "../src/file_logger.h"
+#include <lm/file_logger.h>
 
 //In the example we will use locking sentries to use multiple threads writing
 //to the same logger.
-#include "../src/sentry.h"
+#include <lm/sentry.h>
 
 #include <thread>
 #include <string>

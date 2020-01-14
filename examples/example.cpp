@@ -1,10 +1,11 @@
+#include <lm/sentry.h>
+#include <lm/file_logger.h>
+#include <lm/void_logger.h>
+#include <lm/ostream_logger.h>
+
 #include <iostream>
 #include <limits>
 #include <string>
-#include "../src/sentry.h"
-#include "../src/file_logger.h"
-#include "../src/void_logger.h"
-#include "../src/ostream_logger.h"
 
 //This example shows how to use all three different loggers in a non-threaded
 //way.

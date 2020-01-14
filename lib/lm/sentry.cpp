@@ -1,4 +1,4 @@
-#include "sentry.h"
+#include <lm/sentry.h>
 
 using namespace lm;
 

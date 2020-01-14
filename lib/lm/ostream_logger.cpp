@@ -1,4 +1,4 @@
-#include "ostream_logger.h"
+#include <lm/ostream_logger.h>
 
 using namespace lm;
 

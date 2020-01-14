@@ -1,8 +1,8 @@
 //This example will use a ostream_logger: a log that writes to an output stream.
-#include "../src/ostream_logger.h"
+#include <lm/ostream_logger.h> 
 
-//Of course, we need the sentries to write to a logger.
-#include "../src/sentry.h"
+//Of course, we need the sentries to write to a logger. 
+#include <lm/sentry.h>
 
 #include <iostream>
 #include <vector>
