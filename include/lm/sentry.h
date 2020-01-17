@@ -1,4 +1,5 @@
 #pragma once
+
 #include "logger.h"
 
 #include "definitions.h"
@@ -16,10 +17,6 @@ locking_sentry lock(logger&, lvl);
 
 //!Starts a log chain that will not lock the logger.
 sentry log(logger&, lvl);
-
-//!Shared mutex for this part of the library...
-//TODO: Something interesting: different loggers should not share the same mutex
-std::mutex locking_sentry_mutex;
 
 //!The locking sentry acts a log proxy that guarantees that a chain of insertion
 //!operators will happen sequentially in the log thread, without other calls to
@@ -67,7 +64,12 @@ class locking_sentry{
 				locking_sentry(logger& _logger);
 
 	logger&			logger_instance;
-	
+	//
+	//!Shared mutex for this part of the library...
+	//TODO: Something interesting: different loggers should not share the same mutex
+	static	std::mutex locking_sentry_mutex;
+
+
 	friend locking_sentry   lock(logger&, lvl);
 };
 

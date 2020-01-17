@@ -2,9 +2,11 @@
 
 using namespace lm;
 
+std::mutex locking_sentry::locking_sentry_mutex;
+
 locking_sentry lm::lock(logger& _logger, lvl _type) {
 
-	locking_sentry_mutex.lock();
+	locking_sentry::locking_sentry_mutex.lock();
 	_logger<<lm::now()<<" "<<_type<<" ";
 	return locking_sentry{_logger};
 }
