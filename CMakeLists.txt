@@ -24,8 +24,8 @@ else()
 	add_library(lm SHARED ${SOURCE})
 endif()
 
-install(TARGETS lm DESTINATION install/lib)
-install(DIRECTORY include/ DESTINATION install/include/ FILES_MATCHING PATTERN "*.h")
+install(TARGETS lm DESTINATION lib)
+install(DIRECTORY include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
 
 if(${BUILD_EXAMPLES})
 	add_executable(multithreading examples/multithreading.cpp)
