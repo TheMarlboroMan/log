@@ -34,6 +34,11 @@ install(TARGETS lm_shared DESTINATION lib)
 install(TARGETS lm_static DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
 
+IF(WIN32)
+	target_compile_definitions(lm_shared PUBLIC -DWINBUILD)
+	target_compile_definitions(lm_static PUBLIC -DWINBUILD)
+ENDIF()
+
 if(${BUILD_EXAMPLES})
 	
 	add_executable(multithreading examples/multithreading.cpp)
