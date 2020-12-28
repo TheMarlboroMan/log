@@ -25,6 +25,8 @@ class file_logger
 	virtual logger& operator<<(unsigned int _input) {return insert(_input);}
 	virtual logger& operator<<(long int _input) {return insert(_input);}
 	virtual logger& operator<<(unsigned long int _input) {return insert(_input);}
+	virtual logger& operator<<(long long int _input) {return insert(_input);}
+	virtual logger& operator<<(unsigned long long int _input) {return insert(_input);}
 	virtual logger& operator<<(double _input) {return insert(_input);}
 	virtual logger& operator<<(const std::string& _input) {return insert(_input);}
 	virtual logger& operator<<(std::ostream& ( *pf )(std::ostream&)) {return insert(pf);}

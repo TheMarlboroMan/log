@@ -21,6 +21,8 @@ class void_logger
 	virtual logger& operator<<(unsigned int) {return *this;}
 	virtual logger& operator<<(long int) {return *this;}
 	virtual logger& operator<<(unsigned long int) {return *this;}
+	virtual logger& operator<<(long long int) {return *this;}
+	virtual logger& operator<<(unsigned long long int) {return *this;}
 	virtual logger& operator<<(double) {return *this;}
 	virtual logger& operator<<(const std::string&) {return *this;}
 	virtual logger& operator<<(std::ostream& (*)(std::ostream&)) {return *this;}

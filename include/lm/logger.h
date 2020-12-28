@@ -6,6 +6,7 @@
 #include <functional>
 #include <ctime>
 #include <cstring>
+#include <string>
 
 namespace lm {
 
@@ -82,7 +83,9 @@ class logger {
 	virtual logger& operator<<(int)=0;
 	virtual logger& operator<<(unsigned int)=0;
 	virtual logger& operator<<(long int)=0;
+	virtual logger& operator<<(long long int)=0;
 	virtual logger& operator<<(unsigned long int)=0;
+	virtual logger& operator<<(unsigned long long int)=0;
 	virtual logger& operator<<(double)=0;
 	virtual logger& operator<<(const std::string&)=0;
 
