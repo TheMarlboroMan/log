@@ -25,7 +25,7 @@ logger& logger::operator<<(lm::now) {
 		format_time=[](std::tm* _time) -> std::string {
 			char * t=new char[str_size];
 			memset(t, '\0', str_size);
-			strftime(t, str_size, "%F %T", _time);
+			strftime(t, str_size, "%F %H:%M:%S", _time);
 			std::string res(t);
 			delete [] t;
 			return std::string("(")+res+")";
