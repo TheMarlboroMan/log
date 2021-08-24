@@ -14,7 +14,7 @@ logger& logger::set_mask(int _mask) {
 	return *this;
 }
 
-logger& logger::operator<<(lm::now) {
+logger& logger::operator<<(lm::manip_now) {
 
 	if(!level_mask_ok) {
 		return *this;
@@ -64,3 +64,98 @@ logger& logger::operator<<(lvl _lvl) {
 	return (*this)<<format_tag(_lvl);
 }
 
+logger& logger::operator<<(manip_debug) {
+
+	level_mask_ok=level_mask & lvl_to_int(lm::lvl::debug);
+	if(!level_mask_ok) {
+
+		return *this;
+	}
+
+	(*this)<<lm::now<<" "<<lm::lvl::debug<<" ";
+	return *this;
+}
+
+logger& logger::operator<<(manip_info) {
+
+	level_mask_ok=level_mask & lvl_to_int(lm::lvl::info);
+	if(!level_mask_ok) {
+
+		return *this;
+	}
+
+	(*this)<<lm::now<<" "<<lm::lvl::info<<" ";
+	return *this;
+}
+
+logger& logger::operator<<(manip_notice) {
+
+	level_mask_ok=level_mask & lvl_to_int(lm::lvl::notice);
+	if(!level_mask_ok) {
+
+		return *this;
+	}
+
+	(*this)<<lm::now<<" "<<lm::lvl::notice<<" ";
+	return *this;
+}
+
+logger& logger::operator<<(manip_warning) {
+
+	level_mask_ok=level_mask & lvl_to_int(lm::lvl::warning);
+	if(!level_mask_ok) {
+
+		return *this;
+	}
+
+	(*this)<<lm::now<<" "<<lm::lvl::warning<<" ";
+	return *this;
+}
+
+logger& logger::operator<<(manip_error) {
+
+	level_mask_ok=level_mask & lvl_to_int(lm::lvl::error);
+	if(!level_mask_ok) {
+
+		return *this;
+	}
+
+	(*this)<<lm::now<<" "<<lm::lvl::error<<" ";
+	return *this;
+}
+
+logger& logger::operator<<(manip_critical) {
+
+	level_mask_ok=level_mask & lvl_to_int(lm::lvl::critical);
+	if(!level_mask_ok) {
+
+		return *this;
+	}
+
+	(*this)<<lm::now<<" "<<lm::lvl::critical<<" ";
+	return *this;
+}
+
+logger& logger::operator<<(manip_alert) {
+
+	level_mask_ok=level_mask & lvl_to_int(lm::lvl::alert);
+	if(!level_mask_ok) {
+
+		return *this;
+	}
+
+	(*this)<<lm::now<<" "<<lm::lvl::alert<<" ";
+	return *this;
+}
+
+logger& logger::operator<<(manip_emergency) {
+
+	level_mask_ok=level_mask & lvl_to_int(lm::lvl::emergency);
+	if(!level_mask_ok) {
+
+		return *this;
+	}
+
+	(*this)<<lm::now<<" "<<lm::lvl::emergency<<" ";
+	return *this;
+}

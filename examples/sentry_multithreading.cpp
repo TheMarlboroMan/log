@@ -33,14 +33,14 @@ struct worker {
 //The chain is used with the insertion operator and ends with the semicolon. As
 //long as the chain has not ended, no other lm::lock calls will write to the
 //logger.
-			lm::lock(wl, lvl::debug)<<"This is "<<name<<" saying debug\n";
-			lm::lock(wl, lvl::info)<<"This is "<<name<<" saying info\n";
-			lm::lock(wl, lvl::notice)<<"This is "<<name<<" saying notice\n";
-			lm::lock(wl, lvl::warning)<<"This is "<<name<<" saying warning\n";
-			lm::lock(wl, lvl::error)<<"This is "<<name<<" saying error\n";
-			lm::lock(wl, lvl::critical)<<"This is "<<name<<" saying critical\n";
-			lm::lock(wl, lvl::alert)<<"This is "<<name<<" saying alert\n";
-			lm::lock(wl, lvl::emergency)<<"This is "<<name<<" saying emergency"<<std::endl;
+			lm::lock(wl, lm::debug)<<"This is "<<name<<" saying debug\n";
+			lm::lock(wl, lm::info)<<"This is "<<name<<" saying info\n";
+			lm::lock(wl, lm::notice)<<"This is "<<name<<" saying notice\n";
+			lm::lock(wl, lm::warning)<<"This is "<<name<<" saying warning\n";
+			lm::lock(wl, lm::error)<<"This is "<<name<<" saying error\n";
+			lm::lock(wl, lm::critical)<<"This is "<<name<<" saying critical\n";
+			lm::lock(wl, lm::alert)<<"This is "<<name<<" saying alert\n";
+			lm::lock(wl, lm::emergency)<<"This is "<<name<<" saying emergency"<<std::endl;
 		}
 	}
 

@@ -46,35 +46,20 @@ class logger {
 
 	//!Returns the current mask value.
 	int get_mask() const {return level_mask;}
+
+#ifndef OPEN_LOG_OPERATORS
 	protected:
+#endif
 
-	//!All insertion operators are protected so that only the sentries 
-	//!access them.
-	
-	//!Insertion operator for a lm::now, which will format the current
-	//!time according to the time format property of this class. A default
-	//!function is provided.
-	logger& operator<<(lm::now);
-
-	//!Insertion operator for a lvl, which will format the passed tag
-	//!using the tag format property of this class. A default function
-	//!is provided.
-	logger& operator<<(lvl);
-
-	//!Stored function to format the tag name.
-	std::function<std::string(const lvl)>		format_tag;
-
-	//!Stored function to format the time.
-	std::function<std::string(std::tm*)>		format_time;
-	
-	//!Level mask. When a message chain comes through, its level is checked
-	//!against the mask and only comes through it the level value can be 
-	//!and'ed with the mask.
-	int level_mask=levels::all;
-
-	//!Saves the state of the level mask against the current message chain
-	//!so that the sentries can check if they must print or not.
-	bool level_mask_ok=true;
+	//!Quick log format.
+	logger& operator<<(manip_debug);
+	logger& operator<<(manip_info);
+	logger& operator<<(manip_notice);
+	logger& operator<<(manip_warning);
+	logger& operator<<(manip_error);
+	logger& operator<<(manip_critical);
+	logger& operator<<(manip_alert);
+	logger& operator<<(manip_emergency);
 
 	//!These are the regular insertion operators for printable types. Each
 	//!derived class must specify the way in which data is managed.
@@ -97,6 +82,35 @@ class logger {
 
 	//!Accepts ios_base modifiers.
 	virtual logger& operator<<(std::ios_base& ( *pf )(std::ios_base&))=0;	
+
+#ifdef OPEN_LOG_OPERATORS
+	protected:
+#endif
+
+	//!Insertion operator for a lm::now, which will format the current
+	//!time according to the time format property of this class. A default
+	//!function is provided.
+	logger& operator<<(lm::manip_now);
+
+	//!Insertion operator for a lvl, which will format the passed tag
+	//!usinglo the tag format property of this class. A default function
+	//!is provided.
+	logger& operator<<(lvl);
+
+	//!Stored function to format the tag name.
+	std::function<std::string(const lvl)>		format_tag;
+
+	//!Stored function to format the time.
+	std::function<std::string(std::tm*)>		format_time;
+	
+	//!Level mask. When a message chain comes through, its level is checked
+	//!against the mask and only comes through it the level value can be 
+	//!and'ed with the mask.
+	int level_mask=levels::all;
+
+	//!Saves the state of the level mask against the current message chain
+	//!so that the sentries can check if they must print or not.
+	bool level_mask_ok=true;
 
 	//!Allows sentries to access the internals of this class.
 	friend class locking_sentry;

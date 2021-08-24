@@ -63,7 +63,7 @@ void log_data(lm::logger& _logger) {
 	std::cout<<"Enter message: >>";
 	std::string msg;
 	std::getline(std::cin, msg);
-	lm::log(_logger, lm::lvl::info)<<msg<<std::endl;
+	lm::log(_logger, lm::info)<<msg<<std::endl;
 }
 
 void test_types(lm::logger& _logger) {
@@ -78,15 +78,15 @@ void test_types(lm::logger& _logger) {
 	char charval='a';
 	std::string strval{"There"};
 
-	lm::log(_logger, lm::lvl::info)<<"Testing output of types..."<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"int: "<<intval<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"unsigned int: "<<unsignedintval<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"long: "<<longval<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"unsigned long: "<<unsignedlongval<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"double: "<<doubleval<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"float: "<<floatval<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"const char *: "<<cstrval<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"char: "<<charval<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"std::string: "<<strval<<std::endl;
+	lm::log(_logger, lm::info)<<"Testing output of types..."<<std::endl;
+	lm::log(_logger, lm::info)<<"int: "<<intval<<std::endl;
+	lm::log(_logger, lm::info)<<"unsigned int: "<<unsignedintval<<std::endl;
+	lm::log(_logger, lm::info)<<"long: "<<longval<<std::endl;
+	lm::log(_logger, lm::info)<<"unsigned long: "<<unsignedlongval<<std::endl;
+	lm::log(_logger, lm::info)<<"double: "<<doubleval<<std::endl;
+	lm::log(_logger, lm::info)<<"float: "<<floatval<<std::endl;
+	lm::log(_logger, lm::info)<<"const char *: "<<cstrval<<std::endl;
+	lm::log(_logger, lm::info)<<"char: "<<charval<<std::endl;
+	lm::log(_logger, lm::info)<<"std::string: "<<strval<<std::endl;
 
 }

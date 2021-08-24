@@ -17,7 +17,9 @@ class ostream_logger
 	//!Class constructor, creates an active log, with a file assigned and opened.
 	ostream_logger(std::ostream&);
 	
+#ifndef OPEN_LOG_OPERATORS
 	protected:
+#endif
 
 	//!This begins the implementation of the base class.
 	virtual logger& operator<<(const char * _input) {return insert(_input);}
@@ -38,6 +40,11 @@ class ostream_logger
 
 	template<typename T>	
 	logger&						insert(const T& _value) {
+
+		if(!level_mask_ok) {
+
+			return *this;
+		}
 
 		s<<_value;
 		s.flush();

@@ -37,12 +37,23 @@ int main(int, char **) {
 
 void say_something(lm::logger& _logger) {
 
-	lm::log(_logger, lm::lvl::emergency)<<"State of emergency!"<<std::endl;
-	lm::log(_logger, lm::lvl::alert)<<"This is an alert"<<std::endl;
-	lm::log(_logger, lm::lvl::critical)<<"This is a critical entry"<<std::endl;
-	lm::log(_logger, lm::lvl::error)<<"This is an error"<<std::endl;
-	lm::log(_logger, lm::lvl::warning)<<"This is merely a warning"<<std::endl;
-	lm::log(_logger, lm::lvl::notice)<<"This is just a notice..."<<std::endl;
-	lm::log(_logger, lm::lvl::info)<<"Some info here..."<<std::endl;
-	lm::log(_logger, lm::lvl::debug)<<"And debug"<<std::endl;
+#ifdef OPEN_INSERTION_OPERATORS
+	_logger<<lm::emergency<<"State of emergency!"<<std::endl;
+	_logger<<lm::alert<<"This is an alert"<<std::endl;
+	_logger<<lm::critical<<"This is a critical entry"<<std::endl;
+	_logger<<lm::error<<"This is an error"<<std::endl;
+	_logger<<lm::warning<<"This is merely a warning"<<std::endl;
+	_logger<<lm::notice<<"This is just a notice..."<<std::endl;
+	_logger<<lm::info<<"Some info here..."<<std::endl;
+	_logger<<lm::debug<<"And debug"<<std::endl;
+#else
+	lm::log(_logger, lm::emergency)<<"State of emergency!"<<std::endl;
+	lm::log(_logger, lm::alert)<<"This is an alert"<<std::endl;
+	lm::log(_logger, lm::critical)<<"This is a critical entry"<<std::endl;
+	lm::log(_logger, lm::error)<<"This is an error"<<std::endl;
+	lm::log(_logger, lm::warning)<<"This is merely a warning"<<std::endl;
+	lm::log(_logger, lm::notice)<<"This is just a notice..."<<std::endl;
+	lm::log(_logger, lm::info)<<"Some info here..."<<std::endl;
+	lm::log(_logger, lm::debug)<<"And debug"<<std::endl;
+#endif
 }

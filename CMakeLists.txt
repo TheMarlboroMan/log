@@ -3,6 +3,7 @@ project(lm)
 
 option(BUILD_EXAMPLES "Build example code" ON)
 option(BUILD_DEBUG "Build a debug release" OFF)
+option(OPEN_INSERTION_OPERATORS "Allows insertion operators to be public" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -39,12 +40,30 @@ IF(WIN32)
 	target_compile_definitions(lm_static PUBLIC -DWINBUILD)
 ENDIF()
 
+if(${OPEN_INSERTION_OPERATORS})
+
+	add_definitions(-DOPEN_INSERTION_OPERATORS)
+endif()
+
+
 if(${BUILD_EXAMPLES})
 	
-	add_executable(multithreading examples/multithreading.cpp)
-	target_link_libraries(multithreading lm_shared pthread)
+	add_executable(sentry_multithreading examples/sentry_multithreading.cpp)
+	target_link_libraries(sentry_multithreading lm_shared pthread)
+
 	add_executable(mask examples/mask.cpp)
 	target_link_libraries(mask lm_shared)
-	add_executable(example examples/example.cpp)
-	target_link_libraries(example lm_shared)
+
+	add_executable(sentry_example examples/sentry_example.cpp)
+	target_link_libraries(sentry_example lm_shared)
+
+if(${OPEN_INSERTION_OPERATORS})
+
+	add_executable(insertion_operator examples/insertion_operator.cpp)
+	target_link_libraries(insertion_operator lm_shared)
+
+endif()
+
+	add_executable(sentry_insertion_operator examples/sentry_insertion_operator.cpp)
+	target_link_libraries(sentry_insertion_operator lm_shared)
 endif()

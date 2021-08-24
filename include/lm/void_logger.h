@@ -11,8 +11,10 @@ class void_logger
 
 	//This class has no members, no constructor is neccesary. The parent
 	//constructor will be automatically called.
-	
+
+#ifndef OPEN_LOG_OPERATORS
 	protected:
+#endif
 
 	//!The implementation of logger is just a series of nothings
 	virtual logger& operator<<(const char *) {return *this;}
