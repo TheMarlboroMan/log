@@ -6,43 +6,19 @@ Ignore them all. Just use master, really. Classic was supposed to be the one tha
 
 ## How does it work?
 
-### Method a, using sentries.
+### using sentries.
 
-- Choose the kind of log you want to use (to an output stream, nowhere, 
+- Choose the kind of log you want to use (to an output stream, nowhere,
   to file...).
 - Instance it.
-- Use the "sentries" to log. Sentries are instanced either by
-	- lm::lock(logger_instance, level) //With locking capabiities for
+- Use the "sentries" to log. Sentries are instanced with
+	- lm::log(logger_instance).lock().[level_call()] //With locking capabiities for
 	  multithreaded applications.
-	- lm::log(logger_instance, level)
-- Sentries are used as if they were streams (lm::lock(logger, lg::info())<<"Hello"<<endl
+	- lm::log(logger_instance).[level_call()]
+- Sentries are used as if they were streams (lm::log(logger).info()<<"Hello"<<endl
 
-#### Advantages:
-- access to the thread lock thing, even if it is something that can (and should, actually) be implemented application wise.
-- simple, unified interface that guarantees that all logs must start with date and log level.
-
-#### Disadvantages:
-
-- the << operator for custom types must be writen as taking log_sentry&& and returning log_sentry&
-- if the sentry is taken by name, the << operator must also be written as taking log_sentry&
-
-### Method b, directly using the << operator.
-
-- Build the library with -DOPEN_LOG_OPERATORS
-- Choose the kind of log you want to use (to an output stream, nowhere, 
-  to file...).
-- Instance it.
-- Loggers are used as if they were streams logger<<lm::info()<<"Hello"<<std::endl;
-
-#### Advantages:
-
-- the << operator for custom types can be defined as taking and returning &logger.
-- disposes of the need to add the sentry header.
-
-#### Disadvantages:
-
-- this approach does not enforce that each log line starts with date and log level, which in combination with flags can result in subtle bugs.
-- must be build with a particular flag.
+- provides access to the thread lock thing, even if it is something that can (and should, actually) be implemented application wise.
+- provides simple, unified interface that guarantees that all logs must start with date and log level.
 
 ## What is this level mask thing?
 

@@ -1,8 +1,8 @@
 /**
 Overloading the << operator a la std::ostream for loggers.
 */
-#include <lm/ostream_logger.h> 
-#include <lm/sentry.h>
+#include <lm/ostream_logger.h>
+#include <lm/log.h>
 #include <lm/file_logger.h>
 #include <lm/void_logger.h>
 #include <lm/ostream_logger.h>

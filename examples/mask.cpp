@@ -1,8 +1,8 @@
 //This example will use a ostream_logger: a log that writes to an output stream.
-#include <lm/ostream_logger.h> 
+#include <lm/ostream_logger.h>
 
-//Of course, we need the sentries to write to a logger. 
-#include <lm/sentry.h>
+//Of course, we need the sentries to write to a logger.
+#include <lm/log.h>
 
 #include <iostream>
 #include <vector>
@@ -37,23 +37,12 @@ int main(int, char **) {
 
 void say_something(lm::logger& _logger) {
 
-#ifdef OPEN_INSERTION_OPERATORS
-	_logger<<lm::emergency<<"State of emergency!"<<std::endl;
-	_logger<<lm::alert<<"This is an alert"<<std::endl;
-	_logger<<lm::critical<<"This is a critical entry"<<std::endl;
-	_logger<<lm::error<<"This is an error"<<std::endl;
-	_logger<<lm::warning<<"This is merely a warning"<<std::endl;
-	_logger<<lm::notice<<"This is just a notice..."<<std::endl;
-	_logger<<lm::info<<"Some info here..."<<std::endl;
-	_logger<<lm::debug<<"And debug"<<std::endl;
-#else
-	lm::log(_logger, lm::emergency)<<"State of emergency!"<<std::endl;
-	lm::log(_logger, lm::alert)<<"This is an alert"<<std::endl;
-	lm::log(_logger, lm::critical)<<"This is a critical entry"<<std::endl;
-	lm::log(_logger, lm::error)<<"This is an error"<<std::endl;
-	lm::log(_logger, lm::warning)<<"This is merely a warning"<<std::endl;
-	lm::log(_logger, lm::notice)<<"This is just a notice..."<<std::endl;
-	lm::log(_logger, lm::info)<<"Some info here..."<<std::endl;
-	lm::log(_logger, lm::debug)<<"And debug"<<std::endl;
-#endif
+	lm::log(_logger).emergency()<<"State of emergency!"<<std::endl;
+	lm::log(_logger).alert()<<"This is an alert"<<std::endl;
+	lm::log(_logger).critical()<<"This is a critical entry"<<std::endl;
+	lm::log(_logger).error()<<"This is an error"<<std::endl;
+	lm::log(_logger).warning()<<"This is merely a warning"<<std::endl;
+	lm::log(_logger).notice()<<"This is just a notice..."<<std::endl;
+	lm::log(_logger).info()<<"Some info here..."<<std::endl;
+	lm::log(_logger).debug()<<"And debug"<<std::endl;
 }

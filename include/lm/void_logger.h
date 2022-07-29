@@ -4,7 +4,7 @@
 
 namespace lm {
 
-//!A logger that does nothing and whose purpose is to exist in production 
+//!A logger that does nothing and whose purpose is to exist in production
 //!applications without removing log code, as questionable as that might be.
 class void_logger
 	:public logger {
@@ -12,10 +12,7 @@ class void_logger
 	//This class has no members, no constructor is neccesary. The parent
 	//constructor will be automatically called.
 
-#ifndef OPEN_LOG_OPERATORS
 	protected:
-#endif
-
 	//!The implementation of logger is just a series of nothings
 	virtual logger& operator<<(const char *) {return *this;}
 	virtual logger& operator<<(char) {return *this;}

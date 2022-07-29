@@ -1,8 +1,8 @@
 /**
 Overloading the << operator a la std::ostream for sentries.
 */
-#include <lm/ostream_logger.h> 
-#include <lm/sentry.h>
+#include <lm/ostream_logger.h>
+#include <lm/log.h>
 #include <lm/file_logger.h>
 #include <lm/void_logger.h>
 #include <lm/ostream_logger.h>
@@ -25,31 +25,17 @@ class some_class {
 	std::string		message;
 	int				number;
 
-//This is the main problem with sentries: the operator must be defined twice,
-//one to allow for lm::log(logger, lvl)<<stuff and other for a named sentry.
-	friend			lm::log_sentry& operator<<(lm::log_sentry&&, const some_class&);
-//	friend			lm::sentry& operator<<(lm::sentry&, const some_class&);
+	friend			lm::log& operator<<(lm::log&, const some_class&);
 };
 
-lm::log_sentry& operator<<(
-	lm::log_sentry&&  _sentry,
+lm::log& operator<<(
+	lm::log&  _log,
 	const some_class& _instance
 ) {
 
-	_sentry<<_instance.message<<" - "<<_instance.number;
-	return _sentry;
+	_log<<_instance.message<<" - "<<_instance.number;
+	return _log;
 }
-
-/*
-lm::sentry& operator<<(
-	lm::sentry&  _sentry,
-	const some_class& _instance
-) {
-
-	_sentry<<_instance.message<<" - "<<_instance.number;
-	return _sentry;
-}
-*/
 
 int main(int, char **) {
 
@@ -60,13 +46,13 @@ int main(int, char **) {
 
 	auto primitives=[](lm::logger& _logger) {
 
-		lm::log(_logger, lm::info)<<"some primitives here "<<33<<std::endl;
+		lm::log(_logger).info()<<"some primitives here "<<33<<", that was a primitive"<<std::endl;
 	};
 
 	auto insertion=[](lm::logger& _logger) {
 
 		some_class instance{"hello there", 12};
-		lm::log(_logger, lm::info)<<instance<<std::endl;
+		lm::log(_logger).info()<<instance<<", that was an instance!"<<std::endl;
 	};
 
 	primitives(fl); primitives(vl); primitives(ol);
@@ -74,4 +60,5 @@ int main(int, char **) {
 
 	return 0;
 }
+
 

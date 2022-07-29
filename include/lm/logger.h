@@ -24,7 +24,7 @@ class logger {
 	//!to the log. Tags are "warning", "log", "critical", "debug" and so
 	//!on.
 	logger& set_tag_format(std::function<std::string(const lvl)> _func) {
-	
+
 		format_tag=_func;
 		return *this;
 	}
@@ -34,23 +34,20 @@ class logger {
 	//!time the log::now struct is sent into a logger, which is automatic
 	//!when using the sentries (such as locking_sentry).
 	logger& set_time_format(std::function<std::string(std::tm*)> _func) {
-		
+
 		format_time=_func;
 		return *this;
 	}
 
 	//!Substitutes the current mask value for the one given. The mask value
 	//!indicates which levels will be actually printed to the underlying
-	//!log system.	
+	//!log system.
 	logger& set_mask(int);
 
 	//!Returns the current mask value.
 	int get_mask() const {return level_mask;}
 
-#ifndef OPEN_LOG_OPERATORS
 	protected:
-#endif
-
 	//!Quick log format.
 	logger& operator<<(manip_debug);
 	logger& operator<<(manip_info);
@@ -76,16 +73,12 @@ class logger {
 
 	//!Accepts ostream modifiers.
 	virtual logger& operator<<(std::ostream& ( *pf )(std::ostream&))=0;
-	
+
 	//!Accepts ios modifiers.
 	virtual logger& operator<<(std::ios& ( *pf )(std::ios&))=0;
 
 	//!Accepts ios_base modifiers.
-	virtual logger& operator<<(std::ios_base& ( *pf )(std::ios_base&))=0;	
-
-#ifdef OPEN_LOG_OPERATORS
-	protected:
-#endif
+	virtual logger& operator<<(std::ios_base& ( *pf )(std::ios_base&))=0;
 
 	//!Insertion operator for a lm::now, which will format the current
 	//!time according to the time format property of this class. A default
@@ -102,9 +95,9 @@ class logger {
 
 	//!Stored function to format the time.
 	std::function<std::string(std::tm*)>		format_time;
-	
+
 	//!Level mask. When a message chain comes through, its level is checked
-	//!against the mask and only comes through it the level value can be 
+	//!against the mask and only comes through it the level value can be
 	//!and'ed with the mask.
 	int level_mask=levels::all;
 
@@ -113,13 +106,14 @@ class logger {
 	bool level_mask_ok=true;
 
 	//!Allows sentries to access the internals of this class.
-	friend class locking_sentry;
-	friend class sentry;
+//	friend class locking_sentry;
+//	friend class sentry;
+	friend class log;
 
-	//!Allows the function that build sentries to access the 
+	//!Allows the function that build sentries to access the
 	//!internals of this class.
-	friend locking_sentry lock(logger&, lvl);
-	friend sentry log(logger&, lvl);
+//	friend locking_sentry lock(logger&, lvl);
+//	friend sentry log(logger&, lvl);
 };
 
 }

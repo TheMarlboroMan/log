@@ -34,7 +34,7 @@ struct levels{
 	static const int none=0;
 	static const int debug=1;
 	static const int info=2;
-	static const int notice=4; 
+	static const int notice=4;
 	static const int warning=8;
 	static const int error=16;
 	static const int critical=32;

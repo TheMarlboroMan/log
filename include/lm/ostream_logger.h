@@ -13,14 +13,11 @@ namespace lm {
 class ostream_logger
 	:public logger {
 	public:
-	
+
 	//!Class constructor, creates an active log, with a file assigned and opened.
 	ostream_logger(std::ostream&);
-	
-#ifndef OPEN_LOG_OPERATORS
-	protected:
-#endif
 
+	protected:
 	//!This begins the implementation of the base class.
 	virtual logger& operator<<(const char * _input) {return insert(_input);}
 	virtual logger& operator<<(char _input) {return insert(_input);}
@@ -38,7 +35,7 @@ class ostream_logger
 
 	private:
 
-	template<typename T>	
+	template<typename T>
 	logger&						insert(const T& _value) {
 
 		if(!level_mask_ok) {

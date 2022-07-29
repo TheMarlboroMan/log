@@ -3,7 +3,7 @@
 
 //In the example we will use locking sentries to use multiple threads writing
 //to the same logger.
-#include <lm/sentry.h>
+#include <lm/log.h>
 
 #include <thread>
 #include <string>
@@ -16,8 +16,9 @@ file_logger wl("testlog.log");
 
 //For this example we will have N workers. Each worker will log for about two
 //seconds without their data becoming corrupted or intertwined. The main thread
-//will keep time and set the "running" flag to false, at which moment the 
+//will keep time and set the "running" flag to false, at which moment the
 //workers will stop logging when all messages in "work()" are issued.
+
 struct worker {
 
 						worker(const std::string& _n, bool& _r):
@@ -29,18 +30,18 @@ struct worker {
 
 		while(running) {
 
-//lm::lock receives a logger and a level. Once called, a "chain" is started. 
+//lm::lock receives a logger. Once called, a "chain" is started.
 //The chain is used with the insertion operator and ends with the semicolon. As
 //long as the chain has not ended, no other lm::lock calls will write to the
 //logger.
-			lm::lock(wl, lm::debug)<<"This is "<<name<<" saying debug\n";
-			lm::lock(wl, lm::info)<<"This is "<<name<<" saying info\n";
-			lm::lock(wl, lm::notice)<<"This is "<<name<<" saying notice\n";
-			lm::lock(wl, lm::warning)<<"This is "<<name<<" saying warning\n";
-			lm::lock(wl, lm::error)<<"This is "<<name<<" saying error\n";
-			lm::lock(wl, lm::critical)<<"This is "<<name<<" saying critical\n";
-			lm::lock(wl, lm::alert)<<"This is "<<name<<" saying alert\n";
-			lm::lock(wl, lm::emergency)<<"This is "<<name<<" saying emergency"<<std::endl;
+			lm::log(wl).lock().debug()<<"This is "<<name<<" saying debug\n";
+			lm::log(wl).lock().info()<<"This is "<<name<<" saying info\n";
+			lm::log(wl).lock().notice()<<"This is "<<name<<" saying notice\n";
+			lm::log(wl).lock().warning()<<"This is "<<name<<" saying warning\n";
+			lm::log(wl).lock().error()<<"This is "<<name<<" saying error\n";
+			lm::log(wl).lock().critical()<<"This is "<<name<<" saying critical\n";
+			lm::log(wl).lock().alert()<<"This is "<<name<<" saying alert\n";
+			lm::log(wl).lock().emergency()<<"This is "<<name<<" saying emergency"<<std::endl;
 		}
 	}
 
@@ -48,10 +49,9 @@ struct worker {
 	std::string			name;
 };
 
-
 int main(int, char **) {
 
-	lm::file_logger fl("testlog.log");
+	lm::file_logger fl("multithreading.log");
 
 	bool running=true;
 
@@ -69,8 +69,8 @@ int main(int, char **) {
 	};
 
 	//!This is written without locks...
-	lm::log(fl, lvl::info)<<"starting example"<<std::endl;
-	
+	lm::log(fl).info()<<"starting example"<<std::endl;
+
 	std::vector<std::thread> threads;
 	//Call "work" in each worker, so they start logging.
 	for(auto& w : workers) {

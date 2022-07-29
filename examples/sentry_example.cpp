@@ -1,4 +1,4 @@
-#include <lm/sentry.h>
+#include <lm/log.h>
 #include <lm/file_logger.h>
 #include <lm/void_logger.h>
 #include <lm/ostream_logger.h>
@@ -32,11 +32,11 @@ int main(int, char **) {
 			case 1: log_data(fl); break;
 			case 2: log_data(ol); break;
 			case 3:	log_data(vl); break;
-				
+
 			default:
 				std::cout<<"Invalid option"<<std::endl;
 			break;
-		}		
+		}
 	}
 }
 
@@ -63,7 +63,7 @@ void log_data(lm::logger& _logger) {
 	std::cout<<"Enter message: >>";
 	std::string msg;
 	std::getline(std::cin, msg);
-	lm::log(_logger, lm::info)<<msg<<std::endl;
+	lm::log(_logger).info()<<msg<<std::endl;
 }
 
 void test_types(lm::logger& _logger) {
@@ -78,15 +78,15 @@ void test_types(lm::logger& _logger) {
 	char charval='a';
 	std::string strval{"There"};
 
-	lm::log(_logger, lm::info)<<"Testing output of types..."<<std::endl;
-	lm::log(_logger, lm::info)<<"int: "<<intval<<std::endl;
-	lm::log(_logger, lm::info)<<"unsigned int: "<<unsignedintval<<std::endl;
-	lm::log(_logger, lm::info)<<"long: "<<longval<<std::endl;
-	lm::log(_logger, lm::info)<<"unsigned long: "<<unsignedlongval<<std::endl;
-	lm::log(_logger, lm::info)<<"double: "<<doubleval<<std::endl;
-	lm::log(_logger, lm::info)<<"float: "<<floatval<<std::endl;
-	lm::log(_logger, lm::info)<<"const char *: "<<cstrval<<std::endl;
-	lm::log(_logger, lm::info)<<"char: "<<charval<<std::endl;
-	lm::log(_logger, lm::info)<<"std::string: "<<strval<<std::endl;
+	lm::log(_logger).info()<<"Testing output of types..."<<std::endl;
+	lm::log(_logger).info()<<"int: "<<intval<<std::endl;
+	lm::log(_logger).info()<<"unsigned int: "<<unsignedintval<<std::endl;
+	lm::log(_logger).info()<<"long: "<<longval<<std::endl;
+	lm::log(_logger).info()<<"unsigned long: "<<unsignedlongval<<std::endl;
+	lm::log(_logger).info()<<"double: "<<doubleval<<std::endl;
+	lm::log(_logger).info()<<"float: "<<floatval<<std::endl;
+	lm::log(_logger).info()<<"const char *: "<<cstrval<<std::endl;
+	lm::log(_logger).info()<<"char: "<<charval<<std::endl;
+	lm::log(_logger).info()<<"std::string: "<<strval<<std::endl;
 
 }
