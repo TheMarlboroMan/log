@@ -6,5 +6,6 @@ set(SOURCE
    ${CMAKE_CURRENT_SOURCE_DIR}/ostream_logger.cpp
    ${CMAKE_CURRENT_SOURCE_DIR}/tools.cpp
    ${CMAKE_CURRENT_SOURCE_DIR}/definitions.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/lib.cpp
    PARENT_SCOPE
 )

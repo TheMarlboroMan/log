@@ -3,44 +3,71 @@ project(lm)
 
 option(BUILD_EXAMPLES "Build example code" ON)
 option(BUILD_DEBUG "Build a debug release" OFF)
+option(BUILD_SHARED "Build a shared library" ON)
+option(BUILD_STATIC "Build a static library" OFF)
+
+#library version
+set(MAJOR_VERSION 3)
+set(MINOR_VERSION 1)
+set(PATCH_VERSION 0)
+
+if(${BUILD_DEBUG})
+	set(CMAKE_BUILD_TYPE Debug)
+	set(BUILD_VERSION "\"-debug\"")
+
+else()
+	set(CMAKE_BUILD_TYPE Release)
+	set(BUILD_VERSION "\"\"")
+endif()
+
+add_definitions(-DMAJOR_VERSION=${MAJOR_VERSION})
+add_definitions(-DMINOR_VERSION=${MINOR_VERSION})
+add_definitions(-DPATCH_VERSION=${PATCH_VERSION})
+add_definitions(-DBUILD_VERSION=${BUILD_VERSION})
+
+message("will build version ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}${BUILD_VERSION}")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-if(${BUILD_DEBUG})
-        set(CMAKE_BUILD_TYPE Debug)
-
-else()
-        set(CMAKE_BUILD_TYPE Release)
-endif()
-
 add_compile_options(-Wall -Wextra -Wundef -Wcast-align -Wwrite-strings -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wshadow -Woverloaded-virtual -Wno-deprecated -ansi -pedantic -fno-rtti)
 
 #Add the include directory.
 include_directories("include")
-
-#Adding sources...
 set(SOURCE "")
 add_subdirectory("${PROJECT_SOURCE_DIR}/lib")
 
 #Library building and installation.
-add_library(lm_shared SHARED ${SOURCE})
-set_target_properties(lm_shared PROPERTIES OUTPUT_NAME lm)
 
-add_library(lm_static STATIC ${SOURCE})
-set_target_properties(lm_static PROPERTIES OUTPUT_NAME lm)
+if(${BUILD_SHARED})
+	add_library(lm_shared SHARED ${SOURCE})
+	set_target_properties(lm_shared PROPERTIES OUTPUT_NAME lm)
+	install(TARGETS lm_shared DESTINATION lib)
+endif()
 
-install(TARGETS lm_shared DESTINATION lib)
-install(TARGETS lm_static DESTINATION lib)
+if(${BUILD_STATIC})
+	add_library(lm_static STATIC ${SOURCE})
+	set_target_properties(lm_static PROPERTIES OUTPUT_NAME lm)
+	install(TARGETS lm_static DESTINATION lib)
+endif()
+
 install(DIRECTORY include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
 
 IF(WIN32)
-	target_compile_definitions(lm_shared PUBLIC -DWINBUILD)
-	target_compile_definitions(lm_static PUBLIC -DWINBUILD)
+	if(${BUILD_SHARED)
+		target_compile_definitions(lm_shared PUBLIC -DWINBUILD)
+	endif()
+	if(${BUILD_STATIC})
+		target_compile_definitions(lm_static PUBLIC -DWINBUILD)
+	endif()
 ENDIF()
 
-
 if(${BUILD_EXAMPLES})
+
+	if(!${BUILD_SHARED})
+
+		message(FATAL_ERROR "The shared library must be built to build the examples!")
+	endif()
 
 	add_executable(sentry_multithreading examples/sentry_multithreading.cpp)
 	target_link_libraries(sentry_multithreading lm_shared pthread)
@@ -53,4 +80,8 @@ if(${BUILD_EXAMPLES})
 
 	add_executable(sentry_insertion_operator examples/sentry_insertion_operator.cpp)
 	target_link_libraries(sentry_insertion_operator lm_shared)
+
+	add_executable(insertion_operator examples/insertion_operator.cpp)
+	target_link_libraries(insertion_operator lm_shared)
+
 endif()

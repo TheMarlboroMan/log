@@ -8,6 +8,7 @@ Ignore them all. Just use master, really. Classic was supposed to be the one tha
 
 ### using sentries.
 
+- This is a bit old... just read the examples.
 - Choose the kind of log you want to use (to an output stream, nowhere,
   to file...).
 - Instance it.
