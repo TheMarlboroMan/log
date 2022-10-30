@@ -38,7 +38,8 @@ class logger {
 		format_time=_func;
 		return *this;
 	}
-
+	
+	virtual ~logger() {}
 	//!Substitutes the current mask value for the one given. The mask value
 	//!indicates which levels will be actually printed to the underlying
 	//!log system.
