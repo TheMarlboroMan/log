@@ -9,23 +9,31 @@ option(BUILD_STATIC "Build a static library" OFF)
 #library version
 set(MAJOR_VERSION 3)
 set(MINOR_VERSION 1)
-set(PATCH_VERSION 0)
+set(PATCH_VERSION 1)
 
 if(${BUILD_DEBUG})
-	set(CMAKE_BUILD_TYPE Debug)
-	set(BUILD_VERSION "\"-debug\"")
+
+	set(RELEASE_VERSION "debug")
 
 else()
-	set(CMAKE_BUILD_TYPE Release)
-	set(BUILD_VERSION "\"\"")
+
+	set(RELEASE_VERSION "prod")
 endif()
 
-add_definitions(-DMAJOR_VERSION=${MAJOR_VERSION})
-add_definitions(-DMINOR_VERSION=${MINOR_VERSION})
-add_definitions(-DPATCH_VERSION=${PATCH_VERSION})
-add_definitions(-DBUILD_VERSION=${BUILD_VERSION})
+if(${CMAKE_VERSION} VERSION_LESS "3.22.0")
 
-message("will build version ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}${BUILD_VERSION}")
+	add_definitions(-DMAJOR_VERSION=${MAJOR_VERSION})
+	add_definitions(-DMINOR_VERSION=${MINOR_VERSION})
+	add_definitions(-DPATCH_VERSION=${PATCH_VERSION})
+	add_definitions(-DRELEASE_VERSION=\"${RELEASE_VERSION}\")
+else()
+
+	add_compile_definitions(MAJOR_VERSION=${MAJOR_VERSION})
+	add_compile_definitions(MINOR_VERSION=${MINOR_VERSION})
+	add_compile_definitions(PATCH_VERSION=${PATCH_VERSION})
+	add_compile_definitions(RELEASE_VERSION=\"${RELEASE_VERSION}\")
+endif()
+
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -37,18 +45,33 @@ include_directories("include")
 set(SOURCE "")
 add_subdirectory("${PROJECT_SOURCE_DIR}/lib")
 
-#Library building and installation.
+#library type and filenames.
+if(${BUILD_DEBUG})
+
+	set(CMAKE_BUILD_TYPE Debug)
+	set(LIB_FILENAME "lm_debug")
+else()
+
+	set(CMAKE_BUILD_TYPE Release)
+	set(LIB_FILENAME "lm")
+endif()
 
 if(${BUILD_SHARED})
 	add_library(lm_shared SHARED ${SOURCE})
-	set_target_properties(lm_shared PROPERTIES OUTPUT_NAME lm)
+	set_target_properties(lm_shared PROPERTIES OUTPUT_NAME ${LIB_FILENAME})
+	target_compile_definitions(lm_shared PUBLIC "-DLIB_VERSION=\"static\"")
 	install(TARGETS lm_shared DESTINATION lib)
+
+	message("will build ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}-${RELEASE_VERSION}-shared")
 endif()
 
 if(${BUILD_STATIC})
 	add_library(lm_static STATIC ${SOURCE})
-	set_target_properties(lm_static PROPERTIES OUTPUT_NAME lm)
+	set_target_properties(lm_static PROPERTIES OUTPUT_NAME ${LIB_FILENAME})
+	target_compile_definitions(lm_static PUBLIC "-DLIB_VERSION=\"static\"")
 	install(TARGETS lm_static DESTINATION lib)
+
+	message("will build ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}-${RELEASE_VERSION}-static")
 endif()
 
 install(DIRECTORY include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
@@ -83,5 +106,8 @@ if(${BUILD_EXAMPLES})
 
 	add_executable(insertion_operator examples/insertion_operator.cpp)
 	target_link_libraries(insertion_operator lm_shared)
+
+	add_executable(version examples/version.cpp)
+	target_link_libraries(version lm_shared)
 
 endif()

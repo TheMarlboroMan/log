@@ -11,6 +11,10 @@ Changes will be documented under Added, Changed, Deprecated, Removed, Fixed or S
 ## Unreleased
 ### Pending
 
+## [V3.1.0]: Jan 2024
+### Changed
+- Changes build process.
+
 ## [V3.1.0]: Ago 2022
 ### Added
 - added get_lib_version() to retrieve this information at runtime.

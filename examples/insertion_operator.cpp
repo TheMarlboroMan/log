@@ -15,6 +15,13 @@ Overloading the << operator a la std::ostream for loggers.
 
 using namespace lm;
 
+class some_class;
+
+lm::log& operator<<(
+	lm::log&  _logger,
+	const some_class& _instance
+);
+
 class some_class {
 
 	public:
