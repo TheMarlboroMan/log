@@ -74,7 +74,8 @@ if(${BUILD_STATIC})
 	message("will build ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}-${RELEASE_VERSION}-static")
 endif()
 
-install(DIRECTORY include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
+set(INSTALL_DIR "include/debug-headers/")
+install(DIRECTORY include/ DESTINATION ${INSTALL_DIR} FILES_MATCHING PATTERN "*.h")
 
 IF(WIN32)
 	if(${BUILD_SHARED)
